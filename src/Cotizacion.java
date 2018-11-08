@@ -19,4 +19,21 @@ public class Cotizacion {
     //cambio camilo 2
     
     private List<Producto> items;
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public List<Producto> getItems() {
+        return items;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setItems(List<Producto> items) {
+        this.items = items;
+    }
+    
 }
