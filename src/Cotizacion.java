@@ -14,6 +14,10 @@ import java.util.List;
  */
 public class Cotizacion {
     
+    public Cotizacion(){
+        
+    }
+    
     
     private LocalDateTime fecha;
     //cambio camilo 2
