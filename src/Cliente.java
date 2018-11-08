@@ -13,5 +13,37 @@ public class Cliente {
    private String RFC;
    private String direccion;
    private TipoCliente tipoCliente;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getRFC() {
+        return RFC;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public TipoCliente getTipoCliente() {
+        return tipoCliente;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setRFC(String RFC) {
+        this.RFC = RFC;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setTipoCliente(TipoCliente tipoCliente) {
+        this.tipoCliente = tipoCliente;
+    }
   
 }
