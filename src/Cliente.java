@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
- enum TipoCliente{empresa, escuela, gobierno, particular}
+ 
 /**
  *
  * @author CoreMac
  */
 public class Cliente {
+    
+    
    private String nombre;
-   private String RFC;
+   private String rfc;
    private String direccion;
    private TipoCliente tipoCliente;
 
@@ -19,7 +21,7 @@ public class Cliente {
     }
 
     public String getRFC() {
-        return RFC;
+        return rfc;
     }
 
     public String getDireccion() {
@@ -34,8 +36,8 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public void setRFC(String RFC) {
-        this.RFC = RFC;
+    public void setRFC(String rfc) {
+        this.rfc = rfc;
     }
 
     public void setDireccion(String direccion) {
@@ -43,6 +45,7 @@ public class Cliente {
     }
 
     public void setTipoCliente(TipoCliente tipoCliente) {
+        
         this.tipoCliente = tipoCliente;
     }
   

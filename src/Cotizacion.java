@@ -1,4 +1,5 @@
 
+import entidades.Producto;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,22 +23,22 @@ public class Cotizacion {
     private LocalDateTime fecha;
     //cambio camilo 2
     
-    private List<Producto> items;
+//    private List<Producto> items;
 
     public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public List<Producto> getItems() {
-        return items;
-    }
+  //  public List<Producto> getItems() {
+   //     return items;
+   // }
 
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 
-    public void setItems(List<Producto> items) {
-        this.items = items;
-    }
+   // public void setItems(List<Producto> items) {
+    //    this.items = items;
+    //}
     
 }
