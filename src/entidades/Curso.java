@@ -1,3 +1,5 @@
+package entidades;
+
 
 import java.time.LocalDateTime;
 
@@ -11,7 +13,7 @@ import java.time.LocalDateTime;
  *
  * @author CoreMac
  */
-public class Curso   {
+public class Curso extends Producto   {
     
     private LocalDateTime fechaInicio;
     private LocalDateTime fechaFin;

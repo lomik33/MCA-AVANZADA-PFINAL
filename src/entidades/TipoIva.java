@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package entidades;
 
 /**
  *
  * @author CoreMac
  */
-public class Usuario {
+public enum TipoIva {
     
+    EXENTO,TASA0,TASA16
 }

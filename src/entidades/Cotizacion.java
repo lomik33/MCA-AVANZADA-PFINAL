@@ -1,3 +1,5 @@
+package entidades;
+
 
 import entidades.Producto;
 import java.time.LocalDateTime;
@@ -40,5 +42,11 @@ public class Cotizacion {
    // public void setItems(List<Producto> items) {
     //    this.items = items;
     //}
+    
+    private double total;
+    private String clave;
+    private int id;
+    private Cliente cliente;
+    
     
 }

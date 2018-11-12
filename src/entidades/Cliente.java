@@ -1,3 +1,8 @@
+package entidades;
+
+
+import entidades.TipoCliente;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,7 +15,7 @@
  */
 public class Cliente {
     
-    
+   private int id;
    private String nombre;
    private String rfc;
    private String direccion;

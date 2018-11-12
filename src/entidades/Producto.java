@@ -52,13 +52,7 @@ public class Producto {
         this.precioUnitario = precioUnitario;
     }
 
-    public int getTasaIva() {
-        return tasaIva;
-    }
-
-    public void setTasaIva(int tasaIva) {
-        this.tasaIva = tasaIva;
-    }
+   
 
     public int getIva() {
         return iva;
@@ -96,7 +90,6 @@ public class Producto {
    /***
     * precioUnitario del producto
     */
-   
    private int precioUnitario;
    
    
@@ -109,7 +102,15 @@ public class Producto {
     * Tasa de Iva 0,16
     */
    
-   private int tasaIva;
+   private TipoIva tasa;
+
+    public TipoIva getTasa() {
+        return tasa;
+    }
+
+    public void setTasa(TipoIva tasa) {
+        this.tasa = tasa;
+    }
    
    
      /**

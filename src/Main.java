@@ -1,5 +1,6 @@
 
 import entidades.Producto;
+import entidades.TipoIva;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -21,24 +22,25 @@ public class Main {
     
     
     public static void  main(String args[]){
-         Configuration configuration = new Configuration();
+        Configuration configuration = new Configuration();
         configuration.configure();
         
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-            configuration.getProperties()).build();
+        configuration.getProperties()).build();
         SessionFactory factory= configuration.buildSessionFactory(serviceRegistry);
         
         
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
+        
         Producto producto= new Producto();
         //producto.setId(1);
         producto.setClave("P001");
-        producto.setNombre("Coca-Cola");
+        producto.setNombre("Pepsi-Cola");
         producto.setDescripcion("600 ml");
         producto.setPrecioUnitario(10);
         producto.setPrecioUnitarioUsd(0);
-        producto.setTasaIva(16);
+        producto.setTasa(TipoIva.TASA16);
         producto.setIva(1);
         session.persist(producto);
         tx.commit();
