@@ -1,7 +1,6 @@
 package entidades;
 
 
-import entidades.Producto;
 import java.time.LocalDateTime;
 import java.util.List;
 
