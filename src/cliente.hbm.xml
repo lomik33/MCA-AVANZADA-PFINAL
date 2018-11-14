@@ -51,14 +51,5 @@ Contributor(s):
     <property column="precioUnitarioUsd" name="precioUnitarioUsd" type="double"/>
     <property column="tasa" name="tasa"/>
     <property column="iva" name="iva" type="double"/>
-
-    <joined-subclass name="entidades.Curso"  table="cursos">
-      <key column="id"/>
-      <property column="cupo" name="cupo" type="int"/>
-      <property column="horario" name="horario" type="string"/>
-         <property name="fechainicio"  />
-      <property name="fechafin"  />
-   
-    </joined-subclass>
   </class>
 </hibernate-mapping>

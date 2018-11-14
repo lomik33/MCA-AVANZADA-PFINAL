@@ -1,6 +1,9 @@
 
+import entidades.Curso;
 import entidades.Producto;
 import entidades.TipoIva;
+import java.time.LocalDateTime;
+import managers.ProductoManager;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -22,29 +25,24 @@ public class Main {
     
     
     public static void  main(String args[]){
-        Configuration configuration = new Configuration();
-        configuration.configure();
+
+        ProductoManager manager= new ProductoManager();        
         
-        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-        configuration.getProperties()).build();
-        SessionFactory factory= configuration.buildSessionFactory(serviceRegistry);
-        
-        
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        
-        Producto producto= new Producto();
-        //producto.setId(1);
-        producto.setClave("P001");
-        producto.setNombre("Pepsi-Cola");
+        //Producto producto= new Producto();
+Curso producto= new Curso();        
+//producto.setId(1);
+        producto.setClave("P003");
+        producto.setNombre("Fanta");
         producto.setDescripcion("600 ml");
         producto.setPrecioUnitario(10);
         producto.setPrecioUnitarioUsd(0);
         producto.setTasa(TipoIva.TASA16);
         producto.setIva(1);
-        session.persist(producto);
-        tx.commit();
-        session.close();
+        producto.setFechainicio(LocalDateTime.now());
+        producto.setFechafin(LocalDateTime.now());
+        producto.setCupo(30);
+        producto.setHorario("horarioo");
+        manager.toSave(producto);
         
     }
 }

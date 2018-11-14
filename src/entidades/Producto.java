@@ -12,6 +12,49 @@ package entidades;
  */
 public class Producto {
 
+   
+    /**
+     * Id
+     */
+    private int id;
+    /**
+     * Clave para efectos internos del sistema
+     */
+   private String clave;
+   /***
+    * Nombre del producto
+    */
+   private String nombre;
+   /**
+    * Descripcion detallada del producto
+    */
+   private String descripcion;
+  
+   /***
+    * precioUnitario del producto
+    */
+   private double precioUnitario;
+   
+   
+   
+   /**
+    * Precio unitario en dolares
+    */
+   private double precioUnitarioUsd;
+   
+      /**
+    * Valor del IVA
+    */
+   private double iva;
+ 
+  
+   
+   /**
+    * Tasa de Iva 0,16
+    */
+   
+   private TipoIva tasa;
+
     public int getId() {
         return id;
     }
@@ -44,65 +87,29 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public int getPrecioUnitario() {
+    public double getPrecioUnitario() {
         return precioUnitario;
     }
 
-    public void setPrecioUnitario(int precioUnitario) {
+    public void setPrecioUnitario(double precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
 
-   
-
-    public int getIva() {
-        return iva;
-    }
-
-    public void setIva(int iva) {
-        this.iva = iva;
-    }
-
-    public int getPrecioUnitarioUsd() {
+    public double getPrecioUnitarioUsd() {
         return precioUnitarioUsd;
     }
 
-    public void setPrecioUnitarioUsd(int precioUnitarioUsd) {
+    public void setPrecioUnitarioUsd(double precioUnitarioUsd) {
         this.precioUnitarioUsd = precioUnitarioUsd;
     }
-   
-    /**
-     * Id
-     */
-    private int id;
-    /**
-     * Clave para efectos internos del sistema
-     */
-   private String clave;
-   /***
-    * Nombre del producto
-    */
-   private String nombre;
-   /**
-    * Descripcion detallada del producto
-    */
-   private String descripcion;
-  
-   /***
-    * precioUnitario del producto
-    */
-   private int precioUnitario;
-   
-   
-   
-   /**
-    * Precio unitario en dolares
-    */
-   private int precioUnitarioUsd;
-   /**
-    * Tasa de Iva 0,16
-    */
-   
-   private TipoIva tasa;
+
+    public double getIva() {
+        return iva;
+    }
+
+    public void setIva(double iva) {
+        this.iva = iva;
+    }
 
     public TipoIva getTasa() {
         return tasa;
@@ -111,13 +118,11 @@ public class Producto {
     public void setTasa(TipoIva tasa) {
         this.tasa = tasa;
     }
+
+  
    
    
-     /**
-    * Valor del IVA
-    */
-   private int iva;
- 
+   
    
     
 }

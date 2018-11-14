@@ -15,27 +15,28 @@ import java.time.LocalDateTime;
  */
 public class Curso extends Producto   {
     
-    private LocalDateTime fechaInicio;
-    private LocalDateTime fechaFin;
+    private LocalDateTime fechainicio;
+    private LocalDateTime fechafin;
     private int cupo;
     private String horario;
 
-    public LocalDateTime getFechaInicio() {
-        return fechaInicio;
+    public LocalDateTime getFechainicio() {
+        return fechainicio;
     }
 
-    public void setFechaInicio(LocalDateTime fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setFechainicio(LocalDateTime fechainicio) {
+        this.fechainicio = fechainicio;
     }
 
-    public LocalDateTime getFechaFin() {
-        return fechaFin;
+    public LocalDateTime getFechafin() {
+        return fechafin;
     }
 
-    public void setFechaFin(LocalDateTime fechaFin) {
-        this.fechaFin = fechaFin;
+    public void setFechafin(LocalDateTime fechafin) {
+        this.fechafin = fechafin;
     }
 
+   
     public int getCupo() {
         return cupo;
     }
