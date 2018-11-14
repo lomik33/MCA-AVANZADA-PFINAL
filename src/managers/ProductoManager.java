@@ -6,6 +6,8 @@
 package managers;
 
 import entidades.Producto;
+import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -26,6 +28,15 @@ public class ProductoManager {
         session.close();
         return centinela;
         
+    }
+    
+    public List<Producto> toSelect(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        Query query;
+        query = session.createQuery("SELECT p FROM Producto p");
+        List<Producto> productos = query.list();
+        return productos;
     }
     
 }
