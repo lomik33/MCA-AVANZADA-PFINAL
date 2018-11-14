@@ -29,20 +29,22 @@ public class Main {
         ProductoManager manager= new ProductoManager();        
         
         //Producto producto= new Producto();
-Curso producto= new Curso();        
-//producto.setId(1);
-        producto.setClave("P003");
-        producto.setNombre("Fanta");
-        producto.setDescripcion("600 ml");
-        producto.setPrecioUnitario(10);
-        producto.setPrecioUnitarioUsd(0);
-        producto.setTasa(TipoIva.TASA16);
-        producto.setIva(1);
-        producto.setFechainicio(LocalDateTime.now());
-        producto.setFechafin(LocalDateTime.now());
-        producto.setCupo(30);
-        producto.setHorario("horarioo");
-        manager.toSave(producto);
-        
+////       Curso producto= new Curso();        
+////producto.setId(1);
+////        producto.setClave("P003");
+////        producto.setNombre("Fanta");
+////        producto.setDescripcion("600 ml");
+////        producto.setPrecioUnitario(10);
+////        producto.setPrecioUnitarioUsd(0);
+////        producto.setTasa(TipoIva.TASA16);
+////        producto.setIva(1);
+////        producto.setFechainicio(LocalDateTime.now());
+////        producto.setFechafin(LocalDateTime.now());
+////        producto.setCupo(30);
+////        producto.setHorario("horarioo");
+////        manager.toSave(producto);
+//// 
+for(Producto p:manager.toSelect())
+            System.out.println(p.getNombre());
     }
 }
