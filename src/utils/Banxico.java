@@ -32,7 +32,7 @@ public class Banxico{
         + "</mns:" + OPERATION + "></SOAP-ENV:Body></SOAP-ENV:Envelope>";
     private final static String REGEX = 
           "<bm:Series\\s++TITULO\\s*+=\\s*+\"(?<titulo>[^\"]*+)\""
-        + "\\s++IDSERIE\\s*+=\\s*+\"SF60653\"[^>]*+>"
+        + "\\s++IDSERIE\\s*+=\\s*+\"SF43718\"[^>]*+>"
         + "\\s*+<bm:Obs\\s++TIME_PERIOD\\s*+=\\s*+\"(?<fecha>[^\"]*+)\""
         + "\\s++OBS_VALUE\\s*+=\\s*+\"(?<cotizacion>[^\"]*)";
 
