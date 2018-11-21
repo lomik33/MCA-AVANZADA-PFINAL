@@ -41,8 +41,9 @@ public class Main {
     
     public static void  main(String args[]) throws JRException{
 
-        ProductoManager manager= new ProductoManager();        
-        
+        Main m= new Main();
+        m.generaReporte();
+
         //Producto producto= new Producto();
 ////       Curso producto= new Curso();        
 ////producto.setId(1);
@@ -64,7 +65,13 @@ public class Main {
    
     
   
-       JasperReport jasperReport = JasperCompileManager
+       
+    }
+
+    
+    
+    private void generaReporte() throws JRException{
+        JasperReport jasperReport = JasperCompileManager
                .compileReport(FileUtil.getRutaSrc()+"SampleReport.jrxml");
  
        // Parameters for report
@@ -98,6 +105,5 @@ public class Main {
     
        System.out.println("Done!");
     }
-
     
     }
