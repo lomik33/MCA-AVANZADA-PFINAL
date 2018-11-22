@@ -3,6 +3,9 @@ import entidades.Curso;
 import entidades.Producto;
 import entidades.TipoIva;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import managers.ProductoManager;
@@ -39,7 +42,7 @@ import utils.FileUtil;
 public class Main {
     
     
-    public static void  main(String args[]) throws JRException{
+    public static void  main(String args[]) throws JRException, FileNotFoundException{
 
         Main m= new Main();
         m.generaReporte();
@@ -70,12 +73,14 @@ public class Main {
 
     
     
-    private void generaReporte() throws JRException{
+    private void generaReporte() throws JRException, FileNotFoundException{
         JasperReport jasperReport = JasperCompileManager
                .compileReport(FileUtil.getRutaSrc()+"SampleReport.jrxml");
  
        // Parameters for report
        HashMap<String, Object> parameters = new HashMap<String, Object>();
+       parameters.put("Parameter1", new String("Me costó un huevo hacer esto"));
+       
  
        // DataSource
        // This is simple example, no database.
