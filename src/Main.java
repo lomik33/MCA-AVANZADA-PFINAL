@@ -79,7 +79,14 @@ public class Main {
  
        // Parameters for report
        HashMap<String, Object> parameters = new HashMap<String, Object>();
-       parameters.put("Parameter1", new String("Me costó un huevo hacer esto"));
+       parameters.put("Parameter1", new String("Dr. Juan Manuel "));
+       parameters.put("Parameter2", "Prueba 2");
+       parameters.put("Parameter3", "Prueba 3");
+       parameters.put("Parameter4", "Prueba 4");
+       parameters.put("Parameter5", "Prueba 5");
+       parameters.put("Parameter6", "Prueba 6");
+       parameters.put("Parameter7", "Prueba 7");
+       parameters.put("Parameter8", "2000");
        
  
        // DataSource
