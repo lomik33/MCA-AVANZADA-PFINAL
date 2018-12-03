@@ -1,7 +1,7 @@
 
 import entidades.Curso;
 import entidades.Producto;
-import entidades.TipoIva;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

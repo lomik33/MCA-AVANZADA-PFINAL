@@ -49,6 +49,7 @@ public class ProductoManager implements Repository<Producto> {
     }
     
     
+    @Override
     public Producto toSelect(int id){
         Producto centinela=null;
         Session session = HibernateUtil.getSessionFactory().openSession();        

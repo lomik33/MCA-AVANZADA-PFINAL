@@ -14,8 +14,8 @@ import java.util.List;
  */
 public interface Repository<TEntity> {
     
-        public int toSave(TEntity entity);
-        
+        public int toSave(TEntity entity);        
         public List<TEntity> toSelect();
+        public TEntity toSelect(int id);
 
 }

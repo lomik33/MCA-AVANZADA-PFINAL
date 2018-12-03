@@ -1,7 +1,7 @@
 package entidades;
 
 
-import entidades.TipoCliente;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -60,6 +60,20 @@ public class Cliente {
 
     public void setRfc(String rfc) {
         this.rfc = rfc;
+    }
+
+    public Cliente() {
+    }
+
+    public Cliente(String nombre, String rfc, String direccion) {
+        this.nombre = nombre;
+        this.rfc = rfc;
+        this.direccion = direccion;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", rfc=" + rfc + ", direccion=" + direccion + '}';
     }
   
     
