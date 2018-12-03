@@ -19,7 +19,6 @@ public class Cliente {
    private String nombre;
    private String rfc;
    private String direccion;
-   private TipoCliente tipoCliente;
 
     public String getNombre() {
         return nombre;
@@ -33,10 +32,7 @@ public class Cliente {
         return direccion;
     }
 
-    public TipoCliente getTipoCliente() {
-        return tipoCliente;
-    }
-
+   
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -49,9 +45,22 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public void setTipoCliente(TipoCliente tipoCliente) {
-        
-        this.tipoCliente = tipoCliente;
+   
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getRfc() {
+        return rfc;
+    }
+
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
     }
   
+    
 }

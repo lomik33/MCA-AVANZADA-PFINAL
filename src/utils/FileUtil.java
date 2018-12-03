@@ -21,13 +21,12 @@ public class FileUtil {
      */
     public static String getRuta(){
         Path currentRelativePath = Paths.get("");
-
         String ruta = currentRelativePath.toAbsolutePath().toString()
                 + File.separator;
-                 return ruta;
-        
+                 return ruta;       
     }
     
+    /*Devue la tura absoluta del folder src del proyecto*/
     public static String getRutaSrc(){
         return getRuta()+ "src"
                 + File.separator;

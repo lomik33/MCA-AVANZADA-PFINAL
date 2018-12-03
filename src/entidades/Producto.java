@@ -34,26 +34,36 @@ public class Producto {
     * precioUnitario del producto
     */
    private double precioUnitario;
-   
-   
-   
    /**
     * Precio unitario en dolares
     */
    private double precioUnitarioUsd;
    
-      /**
+    /**
     * Valor del IVA
     */
-   private double iva;
+   private double tasaIva;
+   
+   private boolean aplicaUsd;
+
+    public boolean isAplicaUsd() {
+        return aplicaUsd;
+    }
+
+    public void setAplicaUsd(boolean aplicaUsd) {
+        this.aplicaUsd = aplicaUsd;
+    }
+
+    public double getTasaIva() {
+        return tasaIva;
+    }
+
+    public void setTasaIva(double tasaIva) {
+        this.tasaIva = tasaIva;
+    }
  
   
-   
-   /**
-    * Tasa de Iva 0,16
-    */
-   
-   private TipoIva tasa;
+  
 
     public int getId() {
         return id;
@@ -103,26 +113,27 @@ public class Producto {
         this.precioUnitarioUsd = precioUnitarioUsd;
     }
 
-    public double getIva() {
-        return iva;
+   
+
+    public Producto() {
     }
 
-    public void setIva(double iva) {
-        this.iva = iva;
+    public Producto(String clave, String nombre, String descripcion, double precioUnitario, double precioUnitarioUsd, double tasaIva, boolean aplicaUsd) {
+        this.clave = clave;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precioUnitario = precioUnitario;
+        this.precioUnitarioUsd = precioUnitarioUsd;
+        this.tasaIva = tasaIva;
+        this.aplicaUsd = aplicaUsd;
     }
 
-    public TipoIva getTasa() {
-        return tasa;
+    @Override
+    public String toString() {
+        return "Producto{" + "clave=" + clave + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precioUnitario=" + precioUnitario + ", precioUnitarioUsd=" + precioUnitarioUsd + ", tasaIva=" + tasaIva + ", aplicaUsd=" + aplicaUsd + '}';
     }
 
-    public void setTasa(TipoIva tasa) {
-        this.tasa = tasa;
-    }
-
-  
-   
-   
-   
-   
+    
+    
     
 }
