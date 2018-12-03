@@ -40,9 +40,7 @@ public class ProductoCotizacion  {
     * Tasa de Iva 0,16
     */
    
-   private TipoIva tasa;
-   
-   
+
    /**
     * Relacion conb producto
     */
