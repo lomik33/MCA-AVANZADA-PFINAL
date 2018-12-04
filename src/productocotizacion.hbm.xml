@@ -40,24 +40,25 @@ made subject to such option by the copyright holder.
 Contributor(s):
 -->
 <hibernate-mapping>
-  <class dynamic-insert="false" dynamic-update="false" mutable="true" name="entidades.ProductoCotizacion" table="productos_cotizacion" optimistic-lock="version" polymorphism="implicit" select-before-update="false">
+    <class  
+           name="entidades.ProductoCotizacion" table="productos_cotizacion">
   
-  <id column="id" name="id" type="int">
-      <generator class="identity"/>
-    </id>
-    <property column="clave" name="clave" type="string"/>
-    <property column="nombre" name="nombre" type="string"/>
-    <property column="descripcion" name="descripcion" type="string"/>
-    <property column="precioUnitario" name="precioUnitario" type="double"/>
-    <property column="precioUnitarioUsd" name="precioUnitarioUsd" type="double"/>
-    <property column="aplicaUsd" name="aplicaUsd"/>
-    <property column="tipoCambio" type="double"/>
-       <property column="cantidad" type="double"/>
-          <property column="subtotal" type="double"/>
-             <property column="impuesto" type="double"/>
-                <property column="importe" type="double"/>
-                 <many-to-one name = "cotizacion" column = "cotizacion" 
-         class="Cotizacion" not-null="true"/>
+        <id column="id" name="id" type="int">
+            <generator class="identity"/>
+        </id>
+        <property column="clave" name="clave" type="string"/>
+        <property column="nombre" name="nombre" type="string"/>
+        <property column="descripcion" name="descripcion" type="string"/>
+        <property column="precioUnitario" name="precioUnitario" type="double"/>
+        <property column="precioUnitarioUsd" name="precioUnitarioUsd" type="double"/>
+        <property column="aplicaUsd" name="aplicaUsd"/>
+        <property name="tipoCambio" type="double"/>
+        <property name="cantidad" type="double"/>
+        <property name="subtotal" type="double"/>
+        <property name="impuesto" type="double"/>
+        <property name="importe" type="double"/>
+        <many-to-one name = "cotizacion" column = "cotizacion" 
+                              class="entidades.Cotizacion" not-null="true"/>
   
-  </class>
+    </class>
 </hibernate-mapping>

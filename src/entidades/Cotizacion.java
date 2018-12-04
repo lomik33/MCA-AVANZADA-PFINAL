@@ -104,6 +104,11 @@ public class Cotizacion {
         this.fecha = fecha;
         this.cliente = cliente;
     }
+
+    @Override
+    public String toString() {
+        return "Cotizacion{" + "fecha=" + fecha + ", total=" + total + ", subTotal=" + subTotal + ", impuestos=" + impuestos + ", clave=" + clave + ", id=" + id + ", cliente=" + cliente + ", items=" + items + '}';
+    }
     
     
 }

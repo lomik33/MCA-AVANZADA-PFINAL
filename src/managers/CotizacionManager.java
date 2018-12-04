@@ -51,4 +51,13 @@ public class CotizacionManager implements Repository<Cotizacion> {
         return centinela;
     }
     
+    
+    
+    public static void main(String []args){
+        CotizacionManager manager= new CotizacionManager();
+        
+        for(Cotizacion c:manager.toSelect())
+            System.out.println(c);
+    }
+    
 }

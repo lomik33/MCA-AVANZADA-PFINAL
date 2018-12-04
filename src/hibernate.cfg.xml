@@ -50,7 +50,8 @@ Contributor(s):
     <property name="hibernate.hdm2ddl.auto">validate</property>
     <mapping resource="producto.hbm.xml"/>
     <mapping resource="cliente.hbm.xml"/>
+     <mapping resource="cotizacion.hbm.xml"/>
     <mapping resource="productocotizacion.hbm.xml"/>
-    <mapping resource="cotizacion.hbm.xml"/>
+   
   </session-factory>
 </hibernate-configuration>

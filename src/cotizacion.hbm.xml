@@ -40,17 +40,26 @@ made subject to such option by the copyright holder.
 Contributor(s):
 -->
 <hibernate-mapping>
-  <class dynamic-insert="false" dynamic-update="false" mutable="true" name="entidades.Cotizacion" optimistic-lock="version" polymorphism="implicit" select-before-update="false">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="entidades.Cotizacion" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="cotizaciones">
   
-      
-      
-      <set name="items" table="productos_cotizacion" 
-				inverse="true" lazy="true" fetch="select">
+        <id column="id" name="id" type="int">
+            <generator class="identity"/>
+        </id>
+        <property column="clave" name="clave" type="string"/>
+        <property name="total" type="double"/>
+        <property name="subTotal" type="double"/>
+        <property name="impuestos" type="double"/>
+
+        <set name="items" table="productos_cotizacion" 
+             inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="cotizacion" not-null="true" />
             </key>
             <one-to-many class="entidades.Producto" />
         </set>
+        
+         <many-to-one name = "cliente" column = "cliente" 
+                              class="entidades.Cliente" not-null="true"/>
   
-  </class>
+    </class>
 </hibernate-mapping>
