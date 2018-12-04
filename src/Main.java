@@ -74,8 +74,10 @@ public class Main {
     
     
     private void generaReporte() throws JRException, FileNotFoundException{
+        String ruta=FileUtil.getRutaSrc()+"SampleReport.jrxml";
+        System.out.println(ruta);
         JasperReport jasperReport = JasperCompileManager
-               .compileReport(FileUtil.getRutaSrc()+"SampleReport.jrxml");
+               .compileReport(ruta);
  
        // Parameters for report
        HashMap<String, Object> parameters = new HashMap<String, Object>();
