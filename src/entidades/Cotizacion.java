@@ -2,6 +2,8 @@ package entidades;
 
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,7 +18,7 @@ import java.time.LocalDateTime;
 public class Cotizacion {
     
     public Cotizacion(){
-        
+        this.items= new HashSet<ProductoCotizacion>();
     }   
     
     private LocalDateTime fecha;
@@ -87,6 +89,16 @@ public class Cotizacion {
     private String clave;
     private int id;
     private Cliente cliente;
+
+    public Set getItems() {
+        return items;
+    }
+
+    public void setItems(Set items) {
+        this.items = items;
+    }
+    private Set<ProductoCotizacion> items;
+    
 
     public Cotizacion(LocalDateTime fecha, Cliente cliente) {
         this.fecha = fecha;

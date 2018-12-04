@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!--
 DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
@@ -39,18 +39,25 @@ made subject to such option by the copyright holder.
 
 Contributor(s):
 -->
-<hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.connection.driver_class">org.sqlite.JDBC</property>
-    <property name="hibernate.connection.url">jdbc:sqlite:data/cotizador.sqlite</property>
-    <property name="connection.username"/>
-    <property name="connection.password"/>
-    <property name="hibernate.dialect">com.enigmabridge.hibernate.dialect.SQLiteDialect</property>
-    <property name="hibernate.show_sql">true</property>
-    <property name="hibernate.hdm2ddl.auto">validate</property>
-    <mapping resource="producto.hbm.xml"/>
-    <mapping resource="cliente.hbm.xml"/>
-    <mapping resource="productocotizacion.hbm.xml"/>
-    <mapping resource="cotizacion.hbm.xml"/>
-  </session-factory>
-</hibernate-configuration>
+<hibernate-mapping>
+  <class dynamic-insert="false" dynamic-update="false" mutable="true" name="entidades.ProductoCotizacion" table="productos_cotizacion" optimistic-lock="version" polymorphism="implicit" select-before-update="false">
+  
+  <id column="id" name="id" type="int">
+      <generator class="identity"/>
+    </id>
+    <property column="clave" name="clave" type="string"/>
+    <property column="nombre" name="nombre" type="string"/>
+    <property column="descripcion" name="descripcion" type="string"/>
+    <property column="precioUnitario" name="precioUnitario" type="double"/>
+    <property column="precioUnitarioUsd" name="precioUnitarioUsd" type="double"/>
+    <property column="aplicaUsd" name="aplicaUsd"/>
+    <property column="tipoCambio" type="double"/>
+       <property column="cantidad" type="double"/>
+          <property column="subtotal" type="double"/>
+             <property column="impuesto" type="double"/>
+                <property column="importe" type="double"/>
+                 <many-to-one name = "cotizacion" column = "cotizacion" 
+         class="Cotizacion" not-null="true"/>
+  
+  </class>
+</hibernate-mapping>

@@ -30,8 +30,16 @@ public class ProductoCotizacion  {
     * precioUnitario del producto
     */
    private double precioUnitario;
+
+    public boolean isAplicaUsd() {
+        return aplicaUsd;
+    }
+
+    public void setAplicaUsd(boolean aplicaUsd) {
+        this.aplicaUsd = aplicaUsd;
+    }
    
-   
+   private boolean aplicaUsd;
    /**
     * Precio unitario en dolares
     */
@@ -44,11 +52,109 @@ public class ProductoCotizacion  {
    
    private double cantidad;
    
+   private double subtotal;
+     
    private double impuesto;
    
    private double importe;
    
-   
+   private Cotizacion cotizacion;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public double getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
+    }
+
+    public double getPrecioUnitarioUsd() {
+        return precioUnitarioUsd;
+    }
+
+    public void setPrecioUnitarioUsd(double precioUnitarioUsd) {
+        this.precioUnitarioUsd = precioUnitarioUsd;
+    }
+
+    public double getTipoCambio() {
+        return tipoCambio;
+    }
+
+    public void setTipoCambio(double tipoCambio) {
+        this.tipoCambio = tipoCambio;
+    }
+
+    public double getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(double cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public double getImpuesto() {
+        return impuesto;
+    }
+
+    public void setImpuesto(double impuesto) {
+        this.impuesto = impuesto;
+    }
+
+    public double getImporte() {
+        return importe;
+    }
+
+    public void setImporte(double importe) {
+        this.importe = importe;
+    }
+
+    public Cotizacion getCotizacion() {
+        return cotizacion;
+    }
+
+    public void setCotizacion(Cotizacion cotizacion) {
+        this.cotizacion = cotizacion;
+    }
    
 
 
