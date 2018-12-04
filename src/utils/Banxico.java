@@ -117,7 +117,7 @@ public class Banxico{
      * @return
      * @throws Exception 
      */
-    private static double getTipoCambioUsd() throws Exception {
+    public static double getTipoCambioUsd() throws Exception {
         double centinela=0;
         try{
         Banxico http = new Banxico();

@@ -1,11 +1,19 @@
 package interfaz;
 
 import entidades.Producto;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import managers.ClienteManager;
 import managers.ProductoManager;
+import utils.Banxico;
 
 /**
  *
@@ -57,6 +65,11 @@ public class Desktop extends javax.swing.JFrame {
         btnCerrar = new javax.swing.JButton();
         btnMinimizar = new javax.swing.JButton();
         jpnEscritorio = new javax.swing.JPanel();
+        jpnDatos = new javax.swing.JPanel();
+        txtCargarClientes = new javax.swing.JTextField();
+        txtCargarServicios = new javax.swing.JTextField();
+        btnClientes = new javax.swing.JButton();
+        btnServicios = new javax.swing.JButton();
         jpnCotizar = new javax.swing.JPanel();
         jcbCurso = new javax.swing.JComboBox<>();
         lblServicios = new javax.swing.JLabel();
@@ -79,11 +92,6 @@ public class Desktop extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         lblFecha = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jpnDatos = new javax.swing.JPanel();
-        txtCargarClientes = new javax.swing.JTextField();
-        txtCargarServicios = new javax.swing.JTextField();
-        btnClientes = new javax.swing.JButton();
-        btnServicios = new javax.swing.JButton();
         jpnInicio = new javax.swing.JPanel();
 
         Eliminar.setText("Eliminar");
@@ -152,6 +160,30 @@ public class Desktop extends javax.swing.JFrame {
         jpnEscritorio.setBackground(new java.awt.Color(255, 255, 255));
         jpnEscritorio.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         jpnEscritorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jpnDatos.setBackground(new java.awt.Color(255, 255, 255));
+        jpnDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpnDatos.add(txtCargarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 350, 40));
+        jpnDatos.add(txtCargarServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 310, 40));
+
+        btnClientes.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        btnClientes.setText("Cliente");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
+        jpnDatos.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 100, 40));
+
+        btnServicios.setText("Servicios");
+        btnServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnServiciosActionPerformed(evt);
+            }
+        });
+        jpnDatos.add(btnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 100, 100, 40));
+
+        jpnEscritorio.add(jpnDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 996, 656));
 
         jpnCotizar.setBackground(new java.awt.Color(255, 255, 255));
         jpnCotizar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -249,25 +281,6 @@ public class Desktop extends javax.swing.JFrame {
 
         jpnEscritorio.add(jpnCotizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 996, 656));
 
-        jpnDatos.setBackground(new java.awt.Color(255, 255, 255));
-        jpnDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jpnDatos.add(txtCargarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 350, 40));
-        jpnDatos.add(txtCargarServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 310, 40));
-
-        btnClientes.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        btnClientes.setText("Cliente");
-        jpnDatos.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 100, 40));
-
-        btnServicios.setText("Servicios");
-        btnServicios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnServiciosActionPerformed(evt);
-            }
-        });
-        jpnDatos.add(btnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 100, 100, 40));
-
-        jpnEscritorio.add(jpnDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 996, 656));
-
         jpnInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jpnEscritorio.add(jpnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 996, 656));
 
@@ -285,7 +298,20 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void btnServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServiciosActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fc=new JFileChooser();
+        fc.showOpenDialog(this);
+            
+        //Creamos el filtro
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt");
+ 
+        //Le indicamos el filtro
+        fc.setFileFilter(filtro);
+        
+        File fichero=fc.getSelectedFile();
+
+        if (fichero != null) {
+            txtCargarServicios.setText(fichero.getAbsolutePath());
+        }
     }//GEN-LAST:event_btnServiciosActionPerformed
 
     private void btnCotizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCotizarActionPerformed
@@ -308,7 +334,13 @@ public class Desktop extends javax.swing.JFrame {
             this.lblPrecioMX.setText(" ");
             this.lblPrecioMX.setText("Precio MX: "+Double.toString(productoSeleccionado.getPrecioUnitario()));
             this.lblPrecioUSD.setText(" ");
-            this.lblPrecioUSD.setText("Precio USD: "+Double.toString(productoSeleccionado.getPrecioUnitarioUsd())); 
+            this.lblPrecioUSD.setText("Precio USD: "+Double.toString(productoSeleccionado.getPrecioUnitarioUsd()));
+            this.lblTipoCambio.setText(" ");
+            try {
+                this.lblTipoCambio.setText("Tipo de Cambio: "+Double.toString(Banxico.getTipoCambioUsd()));
+            } catch (Exception ex) {
+                Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }//GEN-LAST:event_jcbCursoActionPerformed
@@ -316,6 +348,10 @@ public class Desktop extends javax.swing.JFrame {
     private void btnMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizarActionPerformed
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_btnMinimizarActionPerformed
+
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        
+    }//GEN-LAST:event_btnClientesActionPerformed
 
     /**
      * @param args the command line arguments

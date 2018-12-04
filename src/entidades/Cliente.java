@@ -72,8 +72,9 @@ public class Cliente {
     }
 
     @Override
-    public String toString() {
-        return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", rfc=" + rfc + ", direccion=" + direccion + '}';
+   public String toString() {
+        String regresar = nombre + ", "+ rfc + ", "+ direccion;
+        return regresar;
     }
   
     

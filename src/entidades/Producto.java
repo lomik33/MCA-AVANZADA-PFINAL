@@ -129,10 +129,10 @@ public class Producto {
     }
 
     @Override
-    public String toString() {
-        return "Producto{" + "clave=" + clave + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precioUnitario=" + precioUnitario + ", precioUnitarioUsd=" + precioUnitarioUsd + ", tasaIva=" + tasaIva + ", aplicaUsd=" + aplicaUsd + '}';
+   public String toString() {
+        String regresar = nombre + "("+clave+")";
+        return  regresar;
     }
-
     
     
     
