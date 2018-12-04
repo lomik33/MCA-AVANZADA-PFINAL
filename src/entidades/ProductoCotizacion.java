@@ -42,7 +42,7 @@ public class ProductoCotizacion  {
    
 
    /**
-    * Relacion conb producto
+    * Relacion con producto
     */
    private Producto producto;
    

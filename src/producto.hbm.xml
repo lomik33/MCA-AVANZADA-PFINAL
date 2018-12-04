@@ -56,7 +56,7 @@ Contributor(s):
       <key column="id"/>
       <property column="cupo" name="cupo" type="int"/>
       <property column="horario" name="horario" type="string"/>
-         <property name="fechainicio"  />
+      <property name="fechainicio"  />
       <property name="fechafin"  />
    
     </joined-subclass>
