@@ -1,4 +1,5 @@
 
+import entidades.Cotizacion;
 import entidades.Curso;
 import entidades.Producto;
 
@@ -76,13 +77,17 @@ public class Main {
     private void generaReporte() throws JRException, FileNotFoundException{
         String ruta=FileUtil.getRutaSrc()+"SampleReport.jrxml";
         System.out.println(ruta);
+        Cotizacion cotizacion=new Cotizacion();
+        cotizacion.setFecha(LocalDateTime.now());
+        
+        
         JasperReport jasperReport = JasperCompileManager
                .compileReport(ruta);
  
        // Parameters for report
        HashMap<String, Object> parameters = new HashMap<String, Object>();
        parameters.put("Parameter1", new String("Dr. Juan Manuel "));
-       parameters.put("Parameter2", "Prueba 2");
+       parameters.put("Parameter2", cotizacion.getFecha().toString());
        parameters.put("Parameter3", "Prueba 3");
        parameters.put("Parameter4", "Prueba 4");
        parameters.put("Parameter5", "Prueba 5");
