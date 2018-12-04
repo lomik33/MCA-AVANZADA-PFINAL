@@ -21,9 +21,9 @@ import utils.Banxico;
  */
 public class Desktop extends javax.swing.JFrame {
 
-    
     ProductoManager manager;
     ClienteManager clienteM;
+
     /**
      * Creates new form Desktop
      */
@@ -35,16 +35,16 @@ public class Desktop extends javax.swing.JFrame {
         this.jpnCotizar.setVisible(true);
         this.jpnDatos.setVisible(false);
         this.jpnInicio.setVisible(false);
-        
+
         manager.toSelect().forEach(l -> this.jcbCurso.addItem(l));
         clienteM.toSelect().forEach(c -> this.jcbCliente.addItem(c));
-        
+
         Date now = new Date(System.currentTimeMillis());
-        
+
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
 
         this.lblFecha.setText(date.format(now));
-        
+
     }
 
     /**
@@ -153,7 +153,7 @@ public class Desktop extends javax.swing.JFrame {
                 btnMinimizarActionPerformed(evt);
             }
         });
-        jpnMenu.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 0, 40, 40));
+        jpnMenu.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(918, 0, 40, 40));
 
         getContentPane().add(jpnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 40));
 
@@ -298,17 +298,9 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void btnServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServiciosActionPerformed
-        JFileChooser fc=new JFileChooser();
+        JFileChooser fc = new JFileChooser();
         fc.showOpenDialog(this);
-            
-        //Creamos el filtro
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt");
- 
-        //Le indicamos el filtro
-        fc.setFileFilter(filtro);
-        
-        File fichero=fc.getSelectedFile();
-
+        File fichero = fc.getSelectedFile();
         if (fichero != null) {
             txtCargarServicios.setText(fichero.getAbsolutePath());
         }
@@ -327,22 +319,22 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBaseDatosActionPerformed
 
     private void jcbCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCursoActionPerformed
-        
+
         if (this.jcbCurso.getSelectedItem() instanceof Producto) {
             Producto productoSeleccionado = (Producto) this.jcbCurso.getSelectedItem();
             this.txtDescripcion.setText(productoSeleccionado.getDescripcion());
             this.lblPrecioMX.setText(" ");
-            this.lblPrecioMX.setText("Precio MX: "+Double.toString(productoSeleccionado.getPrecioUnitario()));
+            this.lblPrecioMX.setText("Precio MX: " + Double.toString(productoSeleccionado.getPrecioUnitario()));
             this.lblPrecioUSD.setText(" ");
-            this.lblPrecioUSD.setText("Precio USD: "+Double.toString(productoSeleccionado.getPrecioUnitarioUsd()));
+            this.lblPrecioUSD.setText("Precio USD: " + Double.toString(productoSeleccionado.getPrecioUnitarioUsd()));
             this.lblTipoCambio.setText(" ");
             try {
-                this.lblTipoCambio.setText("Tipo de Cambio: "+Double.toString(Banxico.getTipoCambioUsd()));
+                this.lblTipoCambio.setText("Tipo de Cambio: " + Double.toString(Banxico.getTipoCambioUsd()));
             } catch (Exception ex) {
                 Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }//GEN-LAST:event_jcbCursoActionPerformed
 
     private void btnMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizarActionPerformed
@@ -350,7 +342,12 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinimizarActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        
+        JFileChooser fc = new JFileChooser();
+        fc.showOpenDialog(this);
+        File fichero = fc.getSelectedFile();
+        if (fichero != null) {
+            txtCargarClientes.setText(fichero.getAbsolutePath());
+        }
     }//GEN-LAST:event_btnClientesActionPerformed
 
     /**
