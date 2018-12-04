@@ -78,7 +78,7 @@ public class ClienteManager implements Repository<Cliente> {
         List<Cliente> items = query.list();
         session.close();
         return items;
-    }
+      }
       
          /***
      * Importar el archivo csv en base a la base de datos

@@ -111,6 +111,37 @@ public class Banxico{
                     .replaceAll( "&apos;", "'" )
                     .replaceAll( "&quot;", "\"" );
     }
+    
+    /***
+     * Devuelve el tipo de cambio de un web service publico de banxico 
+     * @return
+     * @throws Exception 
+     */
+    private static double getTipoCambioUsd() throws Exception {
+        double centinela=0;
+        try{
+        Banxico http = new Banxico();
+
+        String uxml = http.sendPost();
+        // Sacar las entities 
+        //  (se rompe el XML pero es mas facil procesarlo directamente)
+        String xml = unescapeCommonEntities(uxml);
+        
+        // Obtener los campos buscados con una expresion regular sobre todo el xml
+        Pattern idPatt = Pattern.compile(REGEX);
+        Matcher m = idPatt.matcher(xml);
+        if (m.find()) {
+            centinela=Double.parseDouble(m.group("cotizacion"));
+           
+        } else {
+            System.out.println("ERROR!");
+        }
+        }catch(Exception ex){
+            System.out.println("No fue posible consultar el tipo de cambio servicio no disponible "+ex);
+        }
+        return centinela;
+    }
+
 
 }
 

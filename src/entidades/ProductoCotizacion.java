@@ -29,23 +29,28 @@ public class ProductoCotizacion  {
    /***
     * precioUnitario del producto
     */
-   private int precioUnitario;
+   private double precioUnitario;
    
    
    /**
     * Precio unitario en dolares
     */
-   private int precioUnitarioUsd;
+   private double precioUnitarioUsd;
    /**
     * Tasa de Iva 0,16
     */
    
-
-   /**
-    * Relacion con producto
-    */
-   private Producto producto;
+   private double tipoCambio;
    
+   private double cantidad;
+   
+   private double impuesto;
+   
+   private double importe;
+   
+   
+   
+
 
     
 }
