@@ -43,8 +43,6 @@ public class Desktop extends javax.swing.JFrame {
         this.jpnDatos.setVisible(false);
         this.jpnInicio.setVisible(false);
 
-      
-
         Date now = new Date(System.currentTimeMillis());
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
         this.lblFecha.setText(date.format(now));
@@ -70,11 +68,6 @@ public class Desktop extends javax.swing.JFrame {
         btnCerrar = new javax.swing.JButton();
         btnMinimizar = new javax.swing.JButton();
         jpnEscritorio = new javax.swing.JPanel();
-        jpnDatos = new javax.swing.JPanel();
-        txtCargarClientes = new javax.swing.JTextField();
-        txtCargarServicios = new javax.swing.JTextField();
-        btnClientes = new javax.swing.JButton();
-        btnServicios = new javax.swing.JButton();
         jpnCotizar = new javax.swing.JPanel();
         jcbCurso = new javax.swing.JComboBox<>();
         lblServicios = new javax.swing.JLabel();
@@ -100,6 +93,11 @@ public class Desktop extends javax.swing.JFrame {
         txtCantidad = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnGenerarCotizacion = new javax.swing.JButton();
+        jpnDatos = new javax.swing.JPanel();
+        txtCargarClientes = new javax.swing.JTextField();
+        txtCargarServicios = new javax.swing.JTextField();
+        btnClientes = new javax.swing.JButton();
+        btnServicios = new javax.swing.JButton();
         jpnInicio = new javax.swing.JPanel();
 
         Vaciar.setText("jMenuItem1");
@@ -171,30 +169,6 @@ public class Desktop extends javax.swing.JFrame {
         jpnEscritorio.setBackground(new java.awt.Color(255, 255, 255));
         jpnEscritorio.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         jpnEscritorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jpnDatos.setBackground(new java.awt.Color(255, 255, 255));
-        jpnDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jpnDatos.add(txtCargarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 350, 40));
-        jpnDatos.add(txtCargarServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 310, 40));
-
-        btnClientes.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        btnClientes.setText("Cliente");
-        btnClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClientesActionPerformed(evt);
-            }
-        });
-        jpnDatos.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 100, 40));
-
-        btnServicios.setText("Servicios");
-        btnServicios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnServiciosActionPerformed(evt);
-            }
-        });
-        jpnDatos.add(btnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 100, 100, 40));
-
-        jpnEscritorio.add(jpnDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 996, 656));
 
         jpnCotizar.setBackground(new java.awt.Color(255, 255, 255));
         jpnCotizar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -314,8 +288,6 @@ public class Desktop extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         jLabel1.setText("N˚Cotizacion:");
         jpnCotizar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 150, -1));
-
-        txtCantidad.setText("1");
         jpnCotizar.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 110, 80, 40));
 
         jLabel5.setText("Cantidad:");
@@ -330,6 +302,30 @@ public class Desktop extends javax.swing.JFrame {
         jpnCotizar.add(btnGenerarCotizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 560, -1, -1));
 
         jpnEscritorio.add(jpnCotizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 996, 656));
+
+        jpnDatos.setBackground(new java.awt.Color(255, 255, 255));
+        jpnDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpnDatos.add(txtCargarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 350, 40));
+        jpnDatos.add(txtCargarServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 310, 40));
+
+        btnClientes.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        btnClientes.setText("Cliente");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
+        jpnDatos.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 100, 40));
+
+        btnServicios.setText("Servicios");
+        btnServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnServiciosActionPerformed(evt);
+            }
+        });
+        jpnDatos.add(btnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 100, 100, 40));
+
+        jpnEscritorio.add(jpnDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 996, 656));
 
         jpnInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jpnEscritorio.add(jpnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 996, 656));
@@ -426,30 +422,34 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-
-        if (this.jcbCurso.getSelectedItem() instanceof Producto) {
-            Producto productoSeleccionado = (Producto) this.jcbCurso.getSelectedItem();
-            ProductoCotizacion productoCotizacion = new ProductoCotizacion();
-            productoCotizacion.setClave(productoSeleccionado.getClave());
-            productoCotizacion.setNombre(productoSeleccionado.getNombre());
-            productoCotizacion.setDescripcion(productoSeleccionado.getDescripcion());
-            productoCotizacion.setPrecioUnitario(productoSeleccionado.getPrecioUnitario());
-            productoCotizacion.setPrecioUnitarioUsd(productoSeleccionado.getPrecioUnitarioUsd());
-            productoCotizacion.setAplicaUsd(productoSeleccionado.isAplicaUsd());
-            productoCotizacion.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
-            try {
-                productoCotizacion.setTipoCambio(Banxico.getTipoCambioUsd());
-            } catch (Exception ex) {
-                Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
+            String cantidad = txtCantidad.getText();
+        if (this.txtCantidad.getText() == null || this.txtCantidad.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese la cantidad que requiere");
+        } else {
+            if (this.jcbCurso.getSelectedItem() instanceof Producto) {
+                Producto productoSeleccionado = (Producto) this.jcbCurso.getSelectedItem();
+                ProductoCotizacion productoCotizacion = new ProductoCotizacion();
+                productoCotizacion.setClave(productoSeleccionado.getClave());
+                productoCotizacion.setNombre(productoSeleccionado.getNombre());
+                productoCotizacion.setDescripcion(productoSeleccionado.getDescripcion());
+                productoCotizacion.setPrecioUnitario(productoSeleccionado.getPrecioUnitario());
+                productoCotizacion.setPrecioUnitarioUsd(productoSeleccionado.getPrecioUnitarioUsd());
+                productoCotizacion.setAplicaUsd(productoSeleccionado.isAplicaUsd());
+                productoCotizacion.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
+                try {
+                    productoCotizacion.setTipoCambio(Banxico.getTipoCambioUsd());
+                } catch (Exception ex) {
+                    Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (productoSeleccionado.isAplicaUsd()) {
+                    productoCotizacion.setPrecioUnitario(productoCotizacion.getPrecioUnitarioUsd() * productoCotizacion.getTipoCambio());
+                }
+                productoCotizacion.setImpuesto((productoCotizacion.getCantidad() * productoCotizacion.getPrecioUnitario()) * productoSeleccionado.getTasaIva());
+                productoCotizacion.setSubtotal(productoCotizacion.getCantidad() * productoCotizacion.getPrecioUnitario());
+                productoCotizacion.setImporte(productoCotizacion.getImpuesto() + productoCotizacion.getSubtotal());
+                this.productos.add(productoCotizacion);
+                this.actualizaTabla();
             }
-            if (productoSeleccionado.isAplicaUsd()) {
-                productoCotizacion.setPrecioUnitario(productoCotizacion.getPrecioUnitarioUsd() * productoCotizacion.getTipoCambio());
-            }
-            productoCotizacion.setImpuesto((productoCotizacion.getCantidad() * productoCotizacion.getPrecioUnitario()) * productoSeleccionado.getTasaIva());
-            productoCotizacion.setSubtotal(productoCotizacion.getCantidad() * productoCotizacion.getPrecioUnitario());
-            productoCotizacion.setImporte(productoCotizacion.getImpuesto() + productoCotizacion.getSubtotal());
-            this.productos.add(productoCotizacion);
-            this.actualizaTabla();
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -471,10 +471,11 @@ public class Desktop extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnGenerarCotizacionActionPerformed
 
-    private void actualizaCatalogos(){
+    private void actualizaCatalogos() {
         manager.toSelect().forEach(l -> this.jcbCurso.addItem(l));
         clienteM.toSelect().forEach(c -> this.jcbCliente.addItem(c));
     }
+
     private void actualizaTabla() {
 
         ProductoCotizacionTableModel model = new ProductoCotizacionTableModel();
