@@ -34,6 +34,7 @@ public class Desktop extends javax.swing.JFrame {
      double total = 0;
         double subtotal = 0;
         double impuesto = 0;
+    int X, Y;
 
     /**
      * Creates new form Desktop
@@ -64,8 +65,8 @@ public class Desktop extends javax.swing.JFrame {
     private void initComponents() {
 
         jpmOpciones = new javax.swing.JPopupMenu();
-        Vaciar = new javax.swing.JMenuItem();
         Eliminar = new javax.swing.JMenuItem();
+        Vaciar = new javax.swing.JMenuItem();
         jpnMenu = new javax.swing.JPanel();
         btnCotizar = new javax.swing.JButton();
         btnBaseDatos = new javax.swing.JButton();
@@ -93,7 +94,6 @@ public class Desktop extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         lblFecha = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnGenerarCotizacion = new javax.swing.JButton();
@@ -104,14 +104,7 @@ public class Desktop extends javax.swing.JFrame {
         btnServicios = new javax.swing.JButton();
         jpnInicio = new javax.swing.JPanel();
 
-        Vaciar.setText("jMenuItem1");
-        Vaciar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VaciarActionPerformed(evt);
-            }
-        });
-        jpmOpciones.add(Vaciar);
-
+        Eliminar.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
         Eliminar.setText("Eliminar");
         Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,13 +113,27 @@ public class Desktop extends javax.swing.JFrame {
         });
         jpmOpciones.add(Eliminar);
 
+        Vaciar.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
+        Vaciar.setText("Vaciar Tabla");
+        Vaciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VaciarActionPerformed(evt);
+            }
+        });
+        jpmOpciones.add(Vaciar);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpnMenu.setBackground(new java.awt.Color(102, 102, 255));
         jpnMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jpnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jpnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        jpnMenu.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jpnMenuMouseDragged(evt);
+            }
+        });
         jpnMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jpnMenuMousePressed(evt);
@@ -134,7 +141,7 @@ public class Desktop extends javax.swing.JFrame {
         });
         jpnMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnCotizar.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        btnCotizar.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         btnCotizar.setText("COTIZADOR");
         btnCotizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCotizar.addActionListener(new java.awt.event.ActionListener() {
@@ -144,15 +151,15 @@ public class Desktop extends javax.swing.JFrame {
         });
         jpnMenu.add(btnCotizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 40));
 
-        btnBaseDatos.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        btnBaseDatos.setText("BASE DE DATOS");
+        btnBaseDatos.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        btnBaseDatos.setText("CARGAR CATÁLOGO");
         btnBaseDatos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBaseDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBaseDatosActionPerformed(evt);
             }
         });
-        jpnMenu.add(btnBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 180, 40));
+        jpnMenu.add(btnBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 220, 40));
 
         btnCerrar.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         btnCerrar.setText("X");
@@ -196,7 +203,7 @@ public class Desktop extends javax.swing.JFrame {
         lblServicios.setText("Curso:");
         jpnCotizar.add(lblServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
-        btnAgregar.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        btnAgregar.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,7 +217,7 @@ public class Desktop extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Clave", "Nombre", "Cantidad", "Precio MX", "Precio USD", "Importe"
+                "Clave", "Nombre", "Cantidad", "PrecioUnitario", "PrecioUSD", "Importe"
             }
         ) {
             Class[] types = new Class [] {
@@ -232,23 +239,17 @@ public class Desktop extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jtbServiciosAgregados);
         if (jtbServiciosAgregados.getColumnModel().getColumnCount() > 0) {
             jtbServiciosAgregados.getColumnModel().getColumn(0).setResizable(false);
-            jtbServiciosAgregados.getColumnModel().getColumn(0).setPreferredWidth(100);
             jtbServiciosAgregados.getColumnModel().getColumn(1).setResizable(false);
-            jtbServiciosAgregados.getColumnModel().getColumn(1).setPreferredWidth(500);
             jtbServiciosAgregados.getColumnModel().getColumn(2).setResizable(false);
-            jtbServiciosAgregados.getColumnModel().getColumn(2).setPreferredWidth(100);
             jtbServiciosAgregados.getColumnModel().getColumn(3).setResizable(false);
-            jtbServiciosAgregados.getColumnModel().getColumn(3).setPreferredWidth(100);
             jtbServiciosAgregados.getColumnModel().getColumn(4).setResizable(false);
-            jtbServiciosAgregados.getColumnModel().getColumn(4).setPreferredWidth(100);
             jtbServiciosAgregados.getColumnModel().getColumn(5).setResizable(false);
-            jtbServiciosAgregados.getColumnModel().getColumn(5).setPreferredWidth(100);
         }
 
         jpnCotizar.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 790, 310));
 
         lblDescripcion.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        lblDescripcion.setText("Descripcion:");
+        lblDescripcion.setText("Descripción:");
         jpnCotizar.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
         lblPrecioUSD.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -268,18 +269,20 @@ public class Desktop extends javax.swing.JFrame {
         lblTipoCambio.setText("Tipo Cambio:");
         jpnCotizar.add(lblTipoCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, 200, 30));
 
-        txtDescripcion.setEditable(false);
         txtDescripcion.setColumns(20);
         txtDescripcion.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         txtDescripcion.setLineWrap(true);
         txtDescripcion.setRows(5);
+        txtDescripcion.setDragEnabled(true);
         jScrollPane2.setViewportView(txtDescripcion);
 
-        jpnCotizar.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 660, 90));
+        jpnCotizar.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 660, 100));
 
         jLabel2.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         jLabel2.setText("Total:");
         jpnCotizar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 480, -1, 30));
+
+        txtTotal.setEditable(false);
         jpnCotizar.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 510, 140, 30));
 
         jLabel3.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -289,20 +292,22 @@ public class Desktop extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         jLabel4.setText("Impuesto:");
         jpnCotizar.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 420, -1, -1));
+
+        jTextField1.setEditable(false);
         jpnCotizar.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 440, 150, 30));
+
+        jTextField2.setEditable(false);
         jpnCotizar.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 360, 150, 30));
 
-        lblFecha.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblFecha.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         jpnCotizar.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 20, 110, 20));
-
-        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        jLabel1.setText("N˚Cotizacion:");
-        jpnCotizar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 150, -1));
         jpnCotizar.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 110, 80, 40));
 
+        jLabel5.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         jLabel5.setText("Cantidad:");
         jpnCotizar.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 120, -1, -1));
 
+        btnGenerarCotizacion.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         btnGenerarCotizacion.setText("Cotizar");
         btnGenerarCotizacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -506,10 +511,17 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGenerarCotizacionActionPerformed
 
     private void jpnMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnMenuMousePressed
-        
+        X = evt.getX();
+        Y = evt.getY();
     }//GEN-LAST:event_jpnMenuMousePressed
 
+    private void jpnMenuMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnMenuMouseDragged
+        this.setLocation(this.getLocation().x + evt.getX() - X, this.getLocation().y + evt.getY() - Y);
+    }//GEN-LAST:event_jpnMenuMouseDragged
+
     private void actualizaCatalogos() {
+        this.jcbCliente.removeAllItems();
+        this.jcbCurso.removeAllItems();
         manager.toSelect().forEach(l -> this.jcbCurso.addItem(l));
         clienteM.toSelect().forEach(c -> this.jcbCliente.addItem(c));
     }
@@ -581,7 +593,6 @@ public class Desktop extends javax.swing.JFrame {
     private javax.swing.JButton btnGenerarCotizacion;
     private javax.swing.JButton btnMinimizar;
     private javax.swing.JButton btnServicios;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
