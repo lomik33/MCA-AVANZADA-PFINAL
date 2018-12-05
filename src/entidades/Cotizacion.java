@@ -90,7 +90,7 @@ public class Cotizacion {
     private int id;
     private Cliente cliente;
 
-    public Set getItems() {
+    public Set<ProductoCotizacion> getItems() {
         return items;
     }
 
