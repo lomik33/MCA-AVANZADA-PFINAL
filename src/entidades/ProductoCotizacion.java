@@ -157,6 +157,13 @@ public class ProductoCotizacion  {
     }
    
 
+    public String[] toStringArray(){
+        String[] arreglo = new String[]{
+            this.getClave(), this.getNombre(), Double.toString(this.getCantidad()), Double.toString(this.getPrecioUnitario()), Double.toString(this.getPrecioUnitarioUsd()), Double.toString(this.getImporte())
+        };
+        return arreglo;
+    }
+
 
     
 }

@@ -92,7 +92,8 @@ public class ProductoManager implements Repository<Producto> {
         List<String[]> records = reader.readAll();
         Set<String> set= new HashSet<>();     
         ProductoManager manager= new ProductoManager();
-        for(String[] line:records){            
+        for(String[] line:records){  
+              if(line!=null &&line.length>=6){
             Producto item= new Producto(line[0], line[1], line[2],Double.parseDouble(line[3]) ,Double.parseDouble(line[4]), Double.parseDouble(line[5]), Boolean.parseBoolean(line[6]));
             Producto existe=manager.toSelect(item.getClave());
             //Si la clave ya esta registrada entonces se actualiza la informacion en caso de que se desee editar un registro
@@ -102,7 +103,8 @@ public class ProductoManager implements Repository<Producto> {
             {
                 countImportados++;
                 System.out.println("Importado o actualizado correctamente "+item);
-            }          
+            }         
+          }
             
         }   
         return countImportados;

@@ -130,7 +130,7 @@ public class Producto {
 
     @Override
    public String toString() {
-        String regresar = nombre + "("+clave+")";
+        String regresar = nombre + "("+clave+")"+ " Tasa IVA:"+Double.toString(tasaIva);
         return  regresar;
     }
     

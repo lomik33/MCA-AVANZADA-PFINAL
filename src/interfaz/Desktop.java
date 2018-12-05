@@ -1,11 +1,17 @@
 package interfaz;
 
+import entidades.Cliente;
+import entidades.Cotizacion;
 import entidades.Producto;
+import entidades.ProductoCotizacion;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -23,6 +29,7 @@ public class Desktop extends javax.swing.JFrame {
 
     ProductoManager manager;
     ClienteManager clienteM;
+    List<ProductoCotizacion> productos;
 
     /**
      * Creates new form Desktop
@@ -36,15 +43,13 @@ public class Desktop extends javax.swing.JFrame {
         this.jpnDatos.setVisible(false);
         this.jpnInicio.setVisible(false);
 
-        manager.toSelect().forEach(l -> this.jcbCurso.addItem(l));
-        clienteM.toSelect().forEach(c -> this.jcbCliente.addItem(c));
+      
 
         Date now = new Date(System.currentTimeMillis());
-
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
-
         this.lblFecha.setText(date.format(now));
-
+        productos = new ArrayList<>();
+        actualizaCatalogos();
     }
 
     /**
@@ -57,9 +62,9 @@ public class Desktop extends javax.swing.JFrame {
     private void initComponents() {
 
         jpmOpciones = new javax.swing.JPopupMenu();
+        Vaciar = new javax.swing.JMenuItem();
         Eliminar = new javax.swing.JMenuItem();
         jpnMenu = new javax.swing.JPanel();
-        btnInicio = new javax.swing.JButton();
         btnCotizar = new javax.swing.JButton();
         btnBaseDatos = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
@@ -92,7 +97,18 @@ public class Desktop extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         lblFecha = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtCantidad = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        btnGenerarCotizacion = new javax.swing.JButton();
         jpnInicio = new javax.swing.JPanel();
+
+        Vaciar.setText("jMenuItem1");
+        Vaciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VaciarActionPerformed(evt);
+            }
+        });
+        jpmOpciones.add(Vaciar);
 
         Eliminar.setText("Eliminar");
         Eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -110,11 +126,6 @@ public class Desktop extends javax.swing.JFrame {
         jpnMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jpnMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnInicio.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        btnInicio.setText("INICIO");
-        btnInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpnMenu.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 40));
-
         btnCotizar.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         btnCotizar.setText("COTIZAR");
         btnCotizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -123,7 +134,7 @@ public class Desktop extends javax.swing.JFrame {
                 btnCotizarActionPerformed(evt);
             }
         });
-        jpnMenu.add(btnCotizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 120, 40));
+        jpnMenu.add(btnCotizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 40));
 
         btnBaseDatos.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         btnBaseDatos.setText("BASE DE DATOS");
@@ -133,7 +144,7 @@ public class Desktop extends javax.swing.JFrame {
                 btnBaseDatosActionPerformed(evt);
             }
         });
-        jpnMenu.add(btnBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 200, 40));
+        jpnMenu.add(btnBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 200, 40));
 
         btnCerrar.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         btnCerrar.setText("X");
@@ -203,26 +214,51 @@ public class Desktop extends javax.swing.JFrame {
 
         btnAgregar.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         btnAgregar.setText("Agregar");
-        jpnCotizar.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 100, 160, 100));
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        jpnCotizar.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 180, 160, 90));
 
         jtbServiciosAgregados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Servicio", "Cantidad", "Precio p/u", "Precio Total"
+                "Clave", "Nombre", "Cantidad", "Precio MX", "Precio USD", "Importe"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jtbServiciosAgregados.setComponentPopupMenu(jpmOpciones);
         jScrollPane1.setViewportView(jtbServiciosAgregados);
         if (jtbServiciosAgregados.getColumnModel().getColumnCount() > 0) {
-            jtbServiciosAgregados.getColumnModel().getColumn(0).setPreferredWidth(500);
+            jtbServiciosAgregados.getColumnModel().getColumn(0).setResizable(false);
+            jtbServiciosAgregados.getColumnModel().getColumn(0).setPreferredWidth(100);
             jtbServiciosAgregados.getColumnModel().getColumn(1).setResizable(false);
+            jtbServiciosAgregados.getColumnModel().getColumn(1).setPreferredWidth(500);
             jtbServiciosAgregados.getColumnModel().getColumn(2).setResizable(false);
+            jtbServiciosAgregados.getColumnModel().getColumn(2).setPreferredWidth(100);
             jtbServiciosAgregados.getColumnModel().getColumn(3).setResizable(false);
+            jtbServiciosAgregados.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jtbServiciosAgregados.getColumnModel().getColumn(4).setResizable(false);
+            jtbServiciosAgregados.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jtbServiciosAgregados.getColumnModel().getColumn(5).setResizable(false);
+            jtbServiciosAgregados.getColumnModel().getColumn(5).setPreferredWidth(100);
         }
 
         jpnCotizar.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 790, 310));
@@ -279,6 +315,20 @@ public class Desktop extends javax.swing.JFrame {
         jLabel1.setText("N˚Cotizacion:");
         jpnCotizar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 150, -1));
 
+        txtCantidad.setText("1");
+        jpnCotizar.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 110, 80, 40));
+
+        jLabel5.setText("Cantidad:");
+        jpnCotizar.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 120, -1, -1));
+
+        btnGenerarCotizacion.setText("Cotizar");
+        btnGenerarCotizacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarCotizacionActionPerformed(evt);
+            }
+        });
+        jpnCotizar.add(btnGenerarCotizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 560, -1, -1));
+
         jpnEscritorio.add(jpnCotizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 996, 656));
 
         jpnInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -294,7 +344,17 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-        JOptionPane.showMessageDialog(null, "Servicio Eliminado");
+        int producSelec = this.jtbServiciosAgregados.getSelectedRow();
+        if (producSelec > 0) {
+            this.productos.remove(producSelec - 1);
+            this.actualizaTabla();
+            JOptionPane.showMessageDialog(null, "Producto eliminado");
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un producto");
+        }
+
+//        JOptionPane.showMessageDialog(null, this.jtbServiciosAgregados.getSelectedRow());
+
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void btnServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServiciosActionPerformed
@@ -303,6 +363,13 @@ public class Desktop extends javax.swing.JFrame {
         File fichero = fc.getSelectedFile();
         if (fichero != null) {
             txtCargarServicios.setText(fichero.getAbsolutePath());
+            try {
+                int totalImportados = ProductoManager.importarCsv(fichero);
+                JOptionPane.showMessageDialog(this, "Se importaron/actualizaron: " + totalImportados + " productos correctamente.");
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+                Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnServiciosActionPerformed
 
@@ -310,6 +377,7 @@ public class Desktop extends javax.swing.JFrame {
         this.jpnCotizar.setVisible(true);
         this.jpnDatos.setVisible(false);
         this.jpnInicio.setVisible(false);
+        actualizaCatalogos();
     }//GEN-LAST:event_btnCotizarActionPerformed
 
     private void btnBaseDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBaseDatosActionPerformed
@@ -347,8 +415,85 @@ public class Desktop extends javax.swing.JFrame {
         File fichero = fc.getSelectedFile();
         if (fichero != null) {
             txtCargarClientes.setText(fichero.getAbsolutePath());
+            try {
+                int totalImportados = ClienteManager.importarCsv(fichero);
+                JOptionPane.showMessageDialog(this, "Se importaron/actualizaron: " + totalImportados + " clientes correctamente.");
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+                Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+
+        if (this.jcbCurso.getSelectedItem() instanceof Producto) {
+            Producto productoSeleccionado = (Producto) this.jcbCurso.getSelectedItem();
+            ProductoCotizacion productoCotizacion = new ProductoCotizacion();
+            productoCotizacion.setClave(productoSeleccionado.getClave());
+            productoCotizacion.setNombre(productoSeleccionado.getNombre());
+            productoCotizacion.setDescripcion(productoSeleccionado.getDescripcion());
+            productoCotizacion.setPrecioUnitario(productoSeleccionado.getPrecioUnitario());
+            productoCotizacion.setPrecioUnitarioUsd(productoSeleccionado.getPrecioUnitarioUsd());
+            productoCotizacion.setAplicaUsd(productoSeleccionado.isAplicaUsd());
+            productoCotizacion.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
+            try {
+                productoCotizacion.setTipoCambio(Banxico.getTipoCambioUsd());
+            } catch (Exception ex) {
+                Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (productoSeleccionado.isAplicaUsd()) {
+                productoCotizacion.setPrecioUnitario(productoCotizacion.getPrecioUnitarioUsd() * productoCotizacion.getTipoCambio());
+            }
+            productoCotizacion.setImpuesto((productoCotizacion.getCantidad() * productoCotizacion.getPrecioUnitario()) * productoSeleccionado.getTasaIva());
+            productoCotizacion.setSubtotal(productoCotizacion.getCantidad() * productoCotizacion.getPrecioUnitario());
+            productoCotizacion.setImporte(productoCotizacion.getImpuesto() + productoCotizacion.getSubtotal());
+            this.productos.add(productoCotizacion);
+            this.actualizaTabla();
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void VaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VaciarActionPerformed
+        productos.clear();
+        this.actualizaTabla();
+    }//GEN-LAST:event_VaciarActionPerformed
+
+    private void btnGenerarCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarCotizacionActionPerformed
+        Cotizacion cotizar = new Cotizacion();
+        if (this.jcbCliente.getSelectedItem() instanceof Cliente) {
+            Cliente c = (Cliente) this.jcbCliente.getSelectedItem();
+            cotizar.setCliente(c);
+        }
+        cotizar.setFecha(LocalDateTime.now());
+        if (this.productos != null) {
+            this.productos.forEach(lamda -> cotizar.getItems().add(lamda));
+        }
+
+    }//GEN-LAST:event_btnGenerarCotizacionActionPerformed
+
+    private void actualizaCatalogos(){
+        manager.toSelect().forEach(l -> this.jcbCurso.addItem(l));
+        clienteM.toSelect().forEach(c -> this.jcbCliente.addItem(c));
+    }
+    private void actualizaTabla() {
+
+        ProductoCotizacionTableModel model = new ProductoCotizacionTableModel();
+        double total = 0;
+        double subtotal = 0;
+        double impuesto = 0;
+        for (ProductoCotizacion pc : this.productos) {
+            total += pc.getImporte();
+            subtotal += pc.getSubtotal();
+            impuesto += pc.getImpuesto();
+
+        }
+
+        model.actualiza(productos);
+        this.jtbServiciosAgregados.setModel(model);
+        this.jTextField1.setText(Double.toString(impuesto));
+        this.jTextField2.setText(Double.toString(subtotal));
+        this.txtTotal.setText(Double.toString(total));
+    }
 
     /**
      * @param args the command line arguments
@@ -388,18 +533,20 @@ public class Desktop extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Eliminar;
+    private javax.swing.JMenuItem Vaciar;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBaseDatos;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnCotizar;
-    private javax.swing.JButton btnInicio;
+    private javax.swing.JButton btnGenerarCotizacion;
     private javax.swing.JButton btnMinimizar;
     private javax.swing.JButton btnServicios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
@@ -420,6 +567,7 @@ public class Desktop extends javax.swing.JFrame {
     private javax.swing.JLabel lblPrecioUSD;
     private javax.swing.JLabel lblServicios;
     private javax.swing.JLabel lblTipoCambio;
+    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCargarClientes;
     private javax.swing.JTextField txtCargarServicios;
     private javax.swing.JTextArea txtDescripcion;
