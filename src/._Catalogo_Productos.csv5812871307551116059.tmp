@@ -1,7 +1,0 @@
-clave,nombre,descripcion,preciounitario,preciounitariousd,tasaIva,aplicausd
-MCA-003-2018,Modelos matemáticos para computación,"Resolver problemas complejos a través de modelos matemáticos y computacionales, técnicas de iteración y recursión, teoría de números y modelos de aprendizaje supervisado para atender disciplinas como por ejemplo ciencias de la salud, ciencias de la tierra, finanzas y educación.",1000,0,0,false
-MCA-004-2018,Metodología de la Investigación,"El objetivo de este curso aplicar la metodología científica en sus diferentes fases (análisis, hipótesis, síntesis y validación) para llevar a cabo el desarrollo de un protocolo de investigación.",1200,0,0,false
-MCA-001-2018,Sistemas de Información,"Diseñar sistemas de información a través del análisis de necesidades cliente/negocio especificas a un sector, considerando un entorno globalizado y utilizando modelos de calidad para alinear soluciones tecnologías a negocios.",1300,0,0.16,false
-MCA-002-2018,Programación Avanzada.,Utilizar características avanzadas de un lenguaje Orientado a Objetos para el desarrollo de aplicaciones que puedan explotar flujos de entrada/salida y varios procesadores en una computadora.,2000,0,0.16,false
-JAVA-STD,Examen de certificación ,Oracle Certified,0,25,0,true
-N003PZ,NodeJS Curso 0 a Experto,Curso Completo de NodeJS con el señor doctor profesor don Paricio,5000,0,0.16,false
