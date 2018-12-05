@@ -95,21 +95,22 @@ public class ReportUtil {
       public static void generaReporte(Cotizacion cotizacion) throws JRException, FileNotFoundException {
         JasperReport jasperReport = JasperCompileManager
                 .compileReport(FileUtil.getRutaSrc() + "SampleReport1.jrxml");
-
+        
+        
+        
         String productos="";
+        String total = "";
+        
         for(ProductoCotizacion pc:cotizacion.getItems()){
             productos+=pc.toString()+System.lineSeparator();
         }
         // Parameters for report}
         HashMap<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("Parameter1", cotizacion.getCliente().toString());
-        parameters.put("Parameter2", productos);
-        parameters.put("Parameter3", "Prueba 3");
-        parameters.put("Parameter4", "Prueba 4");
-        parameters.put("Parameter5", "Prueba 5");
-        parameters.put("Parameter6", "Prueba 6");
-        parameters.put("Parameter7", "Prueba 7");
-        parameters.put("Parameter8", "2000");
+        parameters.put("Parameter1", cotizacion.getFecha().toString());
+        parameters.put("Parameter2", cotizacion.getCliente().toString());
+        parameters.put("Parameter3", productos);
+        parameters.put("Parameter4", "cotizacion.getTotal()");
+       
 
         // DataSource
         // This is simple example, no database.
@@ -128,11 +129,11 @@ public class ReportUtil {
         JasperExportManager.exportReportToPdfFile(jasperPrint,
                 rutaReportes + "ejempls.pdf");
 
-//       JRDocxExporter exporter = new JRDocxExporter();
-//    exporter.setExporterInput(new SimpleExporterInput(jasperPrint));      
-//    File exportReportFile = new File(rutaReportes + "ejemplo.docx");
-//    exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(exportReportFile));
-//    exporter.exportReport();
+       JRDocxExporter exporter = new JRDocxExporter();
+    exporter.setExporterInput(new SimpleExporterInput(jasperPrint));      
+    File exportReportFile = new File(rutaReportes + "ejemplo.docx");
+    exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(exportReportFile));
+    exporter.exportReport();
         System.out.println("Done!");
     }
 }
