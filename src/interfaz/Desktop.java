@@ -423,27 +423,27 @@ public class Desktop extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
         if (this.jcbCurso.getSelectedItem() instanceof Producto) {
-            Producto ps = (Producto) this.jcbCurso.getSelectedItem();
-            ProductoCotizacion pc = new ProductoCotizacion();
-            pc.setClave(ps.getClave());
-            pc.setNombre(ps.getNombre());
-            pc.setDescripcion(ps.getDescripcion());
-            pc.setPrecioUnitario(ps.getPrecioUnitario());
-            pc.setPrecioUnitarioUsd(ps.getPrecioUnitarioUsd());
-            pc.setAplicaUsd(ps.isAplicaUsd());
-            pc.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
+            Producto productoSeleccionado = (Producto) this.jcbCurso.getSelectedItem();
+            ProductoCotizacion productoCotizacion = new ProductoCotizacion();
+            productoCotizacion.setClave(productoSeleccionado.getClave());
+            productoCotizacion.setNombre(productoSeleccionado.getNombre());
+            productoCotizacion.setDescripcion(productoSeleccionado.getDescripcion());
+            productoCotizacion.setPrecioUnitario(productoSeleccionado.getPrecioUnitario());
+            productoCotizacion.setPrecioUnitarioUsd(productoSeleccionado.getPrecioUnitarioUsd());
+            productoCotizacion.setAplicaUsd(productoSeleccionado.isAplicaUsd());
+            productoCotizacion.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
             try {
-                pc.setTipoCambio(Banxico.getTipoCambioUsd());
+                productoCotizacion.setTipoCambio(Banxico.getTipoCambioUsd());
             } catch (Exception ex) {
                 Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (ps.isAplicaUsd()) {
-                ps.setPrecioUnitario(pc.getPrecioUnitarioUsd()*pc.getTipoCambio());
+            if (productoSeleccionado.isAplicaUsd()) {
+                productoCotizacion.setPrecioUnitario(productoCotizacion.getPrecioUnitarioUsd()*productoCotizacion.getTipoCambio());
             }
-            pc.setImpuesto((pc.getCantidad() * pc.getPrecioUnitario())*ps.getTasaIva());
-            pc.setSubtotal(pc.getCantidad() * pc.getPrecioUnitario());
-            pc.setImporte(pc.getImpuesto() + pc.getSubtotal());
-            this.productos.add(pc);
+            productoCotizacion.setImpuesto((productoCotizacion.getCantidad() * productoCotizacion.getPrecioUnitario())*productoSeleccionado.getTasaIva());
+            productoCotizacion.setSubtotal(productoCotizacion.getCantidad() * productoCotizacion.getPrecioUnitario());
+            productoCotizacion.setImporte(productoCotizacion.getImpuesto() + productoCotizacion.getSubtotal());
+            this.productos.add(productoCotizacion);
             this.actualizaTabla();
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
