@@ -111,4 +111,8 @@ public class Cotizacion {
     }
     
     
+    public void agregarProducto(ProductoCotizacion producto){
+        this.items.add(producto);
+    }
+    
 }

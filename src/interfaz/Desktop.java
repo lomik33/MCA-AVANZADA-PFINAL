@@ -479,7 +479,7 @@ public class Desktop extends javax.swing.JFrame {
         }
         cotizar.setFecha(LocalDateTime.now());
         if (this.productos != null) {
-            this.productos.forEach(lamda -> cotizar.getItems().add(lamda));
+            this.productos.forEach(lamda -> cotizar.agregarProducto(lamda));
             }
         
         cotizar.setSubTotal(subtotal);
