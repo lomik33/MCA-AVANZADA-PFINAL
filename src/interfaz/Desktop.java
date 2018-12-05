@@ -469,8 +469,21 @@ public class Desktop extends javax.swing.JFrame {
     private void actualizaTabla() {
 
         ProductoCotizacionTableModel model = new ProductoCotizacionTableModel();
+        double total=0;
+        double subtotal=0;
+        double impuesto=0;
+        for(ProductoCotizacion pc:this.productos){
+            total+=pc.getImporte();
+            subtotal+=pc.getSubtotal();
+            impuesto+=pc.getImpuesto();
+            
+        }
+        
         model.actualiza(productos);
         this.jtbServiciosAgregados.setModel(model);
+        this.jTextField1.setText(Double.toString(impuesto));
+        this.jTextField2.setText(Double.toString(subtotal));
+        this.txtTotal.setText(Double.toString(total));
     }
 
     /**
