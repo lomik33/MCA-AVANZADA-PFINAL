@@ -1,11 +1,17 @@
 package interfaz;
 
+import entidades.Cliente;
+import entidades.Cotizacion;
 import entidades.Producto;
+import entidades.ProductoCotizacion;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -23,6 +29,7 @@ public class Desktop extends javax.swing.JFrame {
 
     ProductoManager manager;
     ClienteManager clienteM;
+    List<ProductoCotizacion> productos;
 
     /**
      * Creates new form Desktop
@@ -45,6 +52,8 @@ public class Desktop extends javax.swing.JFrame {
 
         this.lblFecha.setText(date.format(now));
 
+        productos = new ArrayList<>();
+
     }
 
     /**
@@ -57,6 +66,7 @@ public class Desktop extends javax.swing.JFrame {
     private void initComponents() {
 
         jpmOpciones = new javax.swing.JPopupMenu();
+        Vaciar = new javax.swing.JMenuItem();
         Eliminar = new javax.swing.JMenuItem();
         jpnMenu = new javax.swing.JPanel();
         btnInicio = new javax.swing.JButton();
@@ -65,11 +75,6 @@ public class Desktop extends javax.swing.JFrame {
         btnCerrar = new javax.swing.JButton();
         btnMinimizar = new javax.swing.JButton();
         jpnEscritorio = new javax.swing.JPanel();
-        jpnDatos = new javax.swing.JPanel();
-        txtCargarClientes = new javax.swing.JTextField();
-        txtCargarServicios = new javax.swing.JTextField();
-        btnClientes = new javax.swing.JButton();
-        btnServicios = new javax.swing.JButton();
         jpnCotizar = new javax.swing.JPanel();
         jcbCurso = new javax.swing.JComboBox<>();
         lblServicios = new javax.swing.JLabel();
@@ -92,7 +97,23 @@ public class Desktop extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         lblFecha = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtCantidad = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        btnGenerarCotizacion = new javax.swing.JButton();
+        jpnDatos = new javax.swing.JPanel();
+        txtCargarClientes = new javax.swing.JTextField();
+        txtCargarServicios = new javax.swing.JTextField();
+        btnClientes = new javax.swing.JButton();
+        btnServicios = new javax.swing.JButton();
         jpnInicio = new javax.swing.JPanel();
+
+        Vaciar.setText("jMenuItem1");
+        Vaciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VaciarActionPerformed(evt);
+            }
+        });
+        jpmOpciones.add(Vaciar);
 
         Eliminar.setText("Eliminar");
         Eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -161,30 +182,6 @@ public class Desktop extends javax.swing.JFrame {
         jpnEscritorio.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         jpnEscritorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jpnDatos.setBackground(new java.awt.Color(255, 255, 255));
-        jpnDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jpnDatos.add(txtCargarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 350, 40));
-        jpnDatos.add(txtCargarServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 310, 40));
-
-        btnClientes.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        btnClientes.setText("Cliente");
-        btnClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClientesActionPerformed(evt);
-            }
-        });
-        jpnDatos.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 100, 40));
-
-        btnServicios.setText("Servicios");
-        btnServicios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnServiciosActionPerformed(evt);
-            }
-        });
-        jpnDatos.add(btnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 100, 100, 40));
-
-        jpnEscritorio.add(jpnDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 996, 656));
-
         jpnCotizar.setBackground(new java.awt.Color(255, 255, 255));
         jpnCotizar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -203,26 +200,51 @@ public class Desktop extends javax.swing.JFrame {
 
         btnAgregar.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         btnAgregar.setText("Agregar");
-        jpnCotizar.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 100, 160, 100));
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        jpnCotizar.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 180, 160, 90));
 
         jtbServiciosAgregados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Servicio", "Cantidad", "Precio p/u", "Precio Total"
+                "Clave", "Nombre", "Cantidad", "Precio MX", "Precio USD", "Importe"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jtbServiciosAgregados.setComponentPopupMenu(jpmOpciones);
         jScrollPane1.setViewportView(jtbServiciosAgregados);
         if (jtbServiciosAgregados.getColumnModel().getColumnCount() > 0) {
-            jtbServiciosAgregados.getColumnModel().getColumn(0).setPreferredWidth(500);
+            jtbServiciosAgregados.getColumnModel().getColumn(0).setResizable(false);
+            jtbServiciosAgregados.getColumnModel().getColumn(0).setPreferredWidth(100);
             jtbServiciosAgregados.getColumnModel().getColumn(1).setResizable(false);
+            jtbServiciosAgregados.getColumnModel().getColumn(1).setPreferredWidth(500);
             jtbServiciosAgregados.getColumnModel().getColumn(2).setResizable(false);
+            jtbServiciosAgregados.getColumnModel().getColumn(2).setPreferredWidth(100);
             jtbServiciosAgregados.getColumnModel().getColumn(3).setResizable(false);
+            jtbServiciosAgregados.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jtbServiciosAgregados.getColumnModel().getColumn(4).setResizable(false);
+            jtbServiciosAgregados.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jtbServiciosAgregados.getColumnModel().getColumn(5).setResizable(false);
+            jtbServiciosAgregados.getColumnModel().getColumn(5).setPreferredWidth(100);
         }
 
         jpnCotizar.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 790, 310));
@@ -279,7 +301,45 @@ public class Desktop extends javax.swing.JFrame {
         jLabel1.setText("N˚Cotizacion:");
         jpnCotizar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 150, -1));
 
+        txtCantidad.setText("1");
+        jpnCotizar.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 110, 80, 40));
+
+        jLabel5.setText("Cantidad:");
+        jpnCotizar.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 120, -1, -1));
+
+        btnGenerarCotizacion.setText("Cotizar");
+        btnGenerarCotizacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarCotizacionActionPerformed(evt);
+            }
+        });
+        jpnCotizar.add(btnGenerarCotizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 560, -1, -1));
+
         jpnEscritorio.add(jpnCotizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 996, 656));
+
+        jpnDatos.setBackground(new java.awt.Color(255, 255, 255));
+        jpnDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpnDatos.add(txtCargarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 350, 40));
+        jpnDatos.add(txtCargarServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 310, 40));
+
+        btnClientes.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        btnClientes.setText("Cliente");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
+        jpnDatos.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 100, 40));
+
+        btnServicios.setText("Servicios");
+        btnServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnServiciosActionPerformed(evt);
+            }
+        });
+        jpnDatos.add(btnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 100, 100, 40));
+
+        jpnEscritorio.add(jpnDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 996, 656));
 
         jpnInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jpnEscritorio.add(jpnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 996, 656));
@@ -294,7 +354,17 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-        JOptionPane.showMessageDialog(null, "Servicio Eliminado");
+        int producSelec = this.jtbServiciosAgregados.getSelectedRow();
+        if (producSelec > 0) {
+            this.productos.remove(producSelec - 1);
+            this.actualizaTabla();
+            JOptionPane.showMessageDialog(null, "Producto eliminado");
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un producto");
+        }
+
+//        JOptionPane.showMessageDialog(null, this.jtbServiciosAgregados.getSelectedRow());
+
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void btnServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServiciosActionPerformed
@@ -350,6 +420,59 @@ public class Desktop extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnClientesActionPerformed
 
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+
+        if (this.jcbCurso.getSelectedItem() instanceof Producto) {
+            Producto ps = (Producto) this.jcbCurso.getSelectedItem();
+            ProductoCotizacion pc = new ProductoCotizacion();
+            pc.setClave(ps.getClave());
+            pc.setNombre(ps.getNombre());
+            pc.setDescripcion(ps.getDescripcion());
+            pc.setPrecioUnitario(ps.getPrecioUnitario());
+            pc.setPrecioUnitarioUsd(ps.getPrecioUnitarioUsd());
+            pc.setAplicaUsd(ps.isAplicaUsd());
+            pc.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
+            try {
+                pc.setTipoCambio(Banxico.getTipoCambioUsd());
+            } catch (Exception ex) {
+                Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (ps.isAplicaUsd()) {
+                ps.setPrecioUnitario(pc.getPrecioUnitarioUsd()*pc.getTipoCambio());
+            }
+            pc.setImpuesto((pc.getCantidad() * pc.getPrecioUnitario())*ps.getTasaIva());
+            pc.setSubtotal(pc.getCantidad() * pc.getPrecioUnitario());
+            pc.setImporte(pc.getImpuesto() + pc.getSubtotal());
+            this.productos.add(pc);
+            this.actualizaTabla();
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void VaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VaciarActionPerformed
+        productos.clear();
+        this.actualizaTabla();
+    }//GEN-LAST:event_VaciarActionPerformed
+
+    private void btnGenerarCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarCotizacionActionPerformed
+        Cotizacion cotizar = new Cotizacion();
+        if (this.jcbCliente.getSelectedItem() instanceof Cliente) {
+            Cliente c = (Cliente) this.jcbCliente.getSelectedItem();
+            cotizar.setCliente(c);
+        }
+        cotizar.setFecha(LocalDateTime.now());
+        if (this.productos != null) {
+            this.productos.forEach(lamda -> cotizar.getItems().add(lamda));
+        }
+
+    }//GEN-LAST:event_btnGenerarCotizacionActionPerformed
+
+    private void actualizaTabla() {
+
+        ProductoCotizacionTableModel model = new ProductoCotizacionTableModel();
+        model.actualiza(productos);
+        this.jtbServiciosAgregados.setModel(model);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -388,11 +511,13 @@ public class Desktop extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Eliminar;
+    private javax.swing.JMenuItem Vaciar;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBaseDatos;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnCotizar;
+    private javax.swing.JButton btnGenerarCotizacion;
     private javax.swing.JButton btnInicio;
     private javax.swing.JButton btnMinimizar;
     private javax.swing.JButton btnServicios;
@@ -400,6 +525,7 @@ public class Desktop extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
@@ -420,6 +546,7 @@ public class Desktop extends javax.swing.JFrame {
     private javax.swing.JLabel lblPrecioUSD;
     private javax.swing.JLabel lblServicios;
     private javax.swing.JLabel lblTipoCambio;
+    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCargarClientes;
     private javax.swing.JTextField txtCargarServicios;
     private javax.swing.JTextArea txtDescripcion;
