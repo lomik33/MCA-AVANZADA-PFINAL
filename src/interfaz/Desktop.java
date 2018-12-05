@@ -43,17 +43,13 @@ public class Desktop extends javax.swing.JFrame {
         this.jpnDatos.setVisible(false);
         this.jpnInicio.setVisible(false);
 
-        manager.toSelect().forEach(l -> this.jcbCurso.addItem(l));
-        clienteM.toSelect().forEach(c -> this.jcbCliente.addItem(c));
+      
 
         Date now = new Date(System.currentTimeMillis());
-
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
-
         this.lblFecha.setText(date.format(now));
-
         productos = new ArrayList<>();
-
+        actualizaCatalogos();
     }
 
     /**
@@ -381,6 +377,7 @@ public class Desktop extends javax.swing.JFrame {
         this.jpnCotizar.setVisible(true);
         this.jpnDatos.setVisible(false);
         this.jpnInicio.setVisible(false);
+        actualizaCatalogos();
     }//GEN-LAST:event_btnCotizarActionPerformed
 
     private void btnBaseDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBaseDatosActionPerformed
@@ -474,6 +471,10 @@ public class Desktop extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnGenerarCotizacionActionPerformed
 
+    private void actualizaCatalogos(){
+        manager.toSelect().forEach(l -> this.jcbCurso.addItem(l));
+        clienteM.toSelect().forEach(c -> this.jcbCliente.addItem(c));
+    }
     private void actualizaTabla() {
 
         ProductoCotizacionTableModel model = new ProductoCotizacionTableModel();

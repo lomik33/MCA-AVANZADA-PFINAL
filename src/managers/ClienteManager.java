@@ -95,7 +95,8 @@ public class ClienteManager implements Repository<Cliente> {
         reader.readNext(); // Avanza una línea que es el encabezado
        List<String[]> records = reader.readAll();      
         ClienteManager manager= new ClienteManager();
-        for(String[] line:records){            
+        for(String[] line:records){ 
+            if(line!=null &&line.length>=3){
             Cliente item= new Cliente(line[0], line[1], line[2]);
             Cliente existe=manager.toSelect(item.getRfc());
             //Si la clave ya esta registrada entonces se actualiza la informacion en caso de que se desee editar un registro
@@ -105,7 +106,8 @@ public class ClienteManager implements Repository<Cliente> {
             {
                 countImportados++;
                 System.out.println("Importados o actualizado correctamente "+item);
-            }          
+            }        
+          }
             
         }   
         return countImportados;
