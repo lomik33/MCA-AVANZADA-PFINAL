@@ -8,6 +8,7 @@ package utils;
 import entidades.Cotizacion;
 import entidades.Curso;
 import entidades.Producto;
+import entidades.ProductoCotizacion;
 import interfaz.Desktop;
 
 import java.io.File;
@@ -95,10 +96,14 @@ public class ReportUtil {
         JasperReport jasperReport = JasperCompileManager
                 .compileReport(FileUtil.getRutaSrc() + "SampleReport1.jrxml");
 
-        // Parameters for report
+        String productos="";
+        for(ProductoCotizacion pc:cotizacion.getItems()){
+            productos+=pc.toString()+System.lineSeparator();
+        }
+        // Parameters for report}
         HashMap<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("Parameter1", cotizacion.getCliente().toString());
-        parameters.put("Parameter2", "Prueba 2");
+        parameters.put("Parameter2", productos);
         parameters.put("Parameter3", "Prueba 3");
         parameters.put("Parameter4", "Prueba 4");
         parameters.put("Parameter5", "Prueba 5");
