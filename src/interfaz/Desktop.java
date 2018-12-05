@@ -125,14 +125,14 @@ public class Desktop extends javax.swing.JFrame {
         jpnMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnCotizar.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        btnCotizar.setText("COTIZAR");
+        btnCotizar.setText("COTIZADOR");
         btnCotizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCotizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCotizarActionPerformed(evt);
             }
         });
-        jpnMenu.add(btnCotizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 40));
+        jpnMenu.add(btnCotizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 40));
 
         btnBaseDatos.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         btnBaseDatos.setText("BASE DE DATOS");
@@ -142,7 +142,7 @@ public class Desktop extends javax.swing.JFrame {
                 btnBaseDatosActionPerformed(evt);
             }
         });
-        jpnMenu.add(btnBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 200, 40));
+        jpnMenu.add(btnBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 180, 40));
 
         btnCerrar.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         btnCerrar.setText("X");
@@ -459,6 +459,11 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_VaciarActionPerformed
 
     private void btnGenerarCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarCotizacionActionPerformed
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fc.showOpenDialog(this);
+        File fichero = fc.getSelectedFile();
+        String rutaFichero = fichero.getAbsolutePath();
         Cotizacion cotizar = new Cotizacion();
         if (this.jcbCliente.getSelectedItem() instanceof Cliente) {
             Cliente c = (Cliente) this.jcbCliente.getSelectedItem();
