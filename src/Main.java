@@ -1,6 +1,7 @@
 
 import entidades.Curso;
 import entidades.Producto;
+import interfaz.Desktop;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,8 +43,14 @@ public class Main {
 
     public static void main(String args[]) throws JRException, FileNotFoundException {
 
-        Main m = new Main();
-        m.generaReporte();
+        //Main m = new Main();
+        //m.generaReporte();
+         /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Desktop().setVisible(true);
+            }
+        });
 
         //Producto producto= new Producto();
 ////       Curso producto= new Curso();        
@@ -65,44 +72,6 @@ public class Main {
         //          System.out.println(p.getNombre());
     }
 
-    private void generaReporte() throws JRException, FileNotFoundException {
-        JasperReport jasperReport = JasperCompileManager
-                .compileReport(FileUtil.getRutaSrc() + "SampleReport1.jrxml");
-
-        // Parameters for report
-        HashMap<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("Parameter1", "Dr. Juan Manuel ");
-        parameters.put("Parameter2", "Prueba 2");
-        parameters.put("Parameter3", "Prueba 3");
-        parameters.put("Parameter4", "Prueba 4");
-        parameters.put("Parameter5", "Prueba 5");
-        parameters.put("Parameter6", "Prueba 6");
-        parameters.put("Parameter7", "Prueba 7");
-        parameters.put("Parameter8", "2000");
-
-        // DataSource
-        // This is simple example, no database.
-        // then using empty datasource.
-        JRDataSource dataSource = new JREmptyDataSource();
-
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
-                parameters, dataSource);
-
-        // Make sure the output directory exists.
-        String rutaReportes = FileUtil.getRuta() + "reportes" + File.separator;
-        File outDir = new File(rutaReportes);
-        outDir.mkdirs();
-
-        // Export to PDF.
-        JasperExportManager.exportReportToPdfFile(jasperPrint,
-                rutaReportes + "ejempls.pdf");
-
-//       JRDocxExporter exporter = new JRDocxExporter();
-//    exporter.setExporterInput(new SimpleExporterInput(jasperPrint));      
-//    File exportReportFile = new File(rutaReportes + "ejemplo.docx");
-//    exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(exportReportFile));
-//    exporter.exportReport();
-        System.out.println("Done!");
-    }
+  
 
 }

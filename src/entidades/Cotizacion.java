@@ -90,7 +90,7 @@ public class Cotizacion {
     private int id;
     private Cliente cliente;
 
-    public Set getItems() {
+    public Set<ProductoCotizacion> getItems() {
         return items;
     }
 
@@ -110,5 +110,9 @@ public class Cotizacion {
         return "Cotizacion{" + "fecha=" + fecha + ", total=" + total + ", subTotal=" + subTotal + ", impuestos=" + impuestos + ", clave=" + clave + ", id=" + id + ", cliente=" + cliente + ", items=" + items + '}';
     }
     
+    
+    public void agregarProducto(ProductoCotizacion producto){
+        this.items.add(producto);
+    }
     
 }
