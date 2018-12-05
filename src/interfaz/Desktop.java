@@ -69,7 +69,6 @@ public class Desktop extends javax.swing.JFrame {
         Vaciar = new javax.swing.JMenuItem();
         Eliminar = new javax.swing.JMenuItem();
         jpnMenu = new javax.swing.JPanel();
-        btnInicio = new javax.swing.JButton();
         btnCotizar = new javax.swing.JButton();
         btnBaseDatos = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
@@ -131,11 +130,6 @@ public class Desktop extends javax.swing.JFrame {
         jpnMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jpnMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnInicio.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        btnInicio.setText("INICIO");
-        btnInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpnMenu.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 40));
-
         btnCotizar.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         btnCotizar.setText("COTIZAR");
         btnCotizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -144,7 +138,7 @@ public class Desktop extends javax.swing.JFrame {
                 btnCotizarActionPerformed(evt);
             }
         });
-        jpnMenu.add(btnCotizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 120, 40));
+        jpnMenu.add(btnCotizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 40));
 
         btnBaseDatos.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         btnBaseDatos.setText("BASE DE DATOS");
@@ -154,7 +148,7 @@ public class Desktop extends javax.swing.JFrame {
                 btnBaseDatosActionPerformed(evt);
             }
         });
-        jpnMenu.add(btnBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 200, 40));
+        jpnMenu.add(btnBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 200, 40));
 
         btnCerrar.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         btnCerrar.setText("X");
@@ -531,7 +525,6 @@ public class Desktop extends javax.swing.JFrame {
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnCotizar;
     private javax.swing.JButton btnGenerarCotizacion;
-    private javax.swing.JButton btnInicio;
     private javax.swing.JButton btnMinimizar;
     private javax.swing.JButton btnServicios;
     private javax.swing.JLabel jLabel1;
