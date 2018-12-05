@@ -23,7 +23,7 @@ public class ProductoCotizacionTableModel extends DefaultTableModel{
             {null, null, null, null, null}
         },
                 new String[]{
-                    "Clave", "Nombre", "Cantidad", "PrecioUnitario", "PrecioUnitarioUsd", "Importe"
+                    "Clave", "Nombre", "Cantidad", "Precio", "Precio (USD)", "Importe"
                 });
         types = new Class[]{
             java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
