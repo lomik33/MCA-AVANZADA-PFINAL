@@ -59,7 +59,7 @@ Contributor(s):
         </set>
         
          <many-to-one name = "cliente" column = "cliente" 
-                              class="entidades.Cliente" not-null="true"/>
+                              class="entidades.Cliente" not-null="false"/>
   
     </class>
 </hibernate-mapping>

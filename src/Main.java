@@ -77,7 +77,7 @@ public class Main {
         JasperReport jasperReport = JasperCompileManager
                .compileReport(FileUtil.getRutaSrc()+"SampleReport1.jrxml");
         
-        
+    
        // Parameters for report
        HashMap<String, Object> parameters = new HashMap<String, Object>();
        parameters.put("Parameter1", "Dr. Juan Manuel ");

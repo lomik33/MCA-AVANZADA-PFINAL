@@ -55,6 +55,9 @@ public class CotizacionManager implements Repository<Cotizacion> {
     
     public static void main(String []args){
         CotizacionManager manager= new CotizacionManager();
+        Cotizacion cotizacion= new Cotizacion();
+        cotizacion.setClave("01");
+       // cotizacion.se
         
         for(Cotizacion c:manager.toSelect())
             System.out.println(c);
