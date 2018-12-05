@@ -164,6 +164,11 @@ public class ProductoCotizacion  {
         return arreglo;
     }
 
+    @Override
+    public String toString() {
+        return nombre + ", cantidad=" + cantidad + ", importe=" + importe ;
+    }
+
 
     
 }
