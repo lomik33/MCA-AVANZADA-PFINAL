@@ -5,7 +5,7 @@ import entidades.Cotizacion;
 import entidades.Producto;
 import entidades.ProductoCotizacion;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -16,10 +16,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import managers.ClienteManager;
 import managers.ProductoManager;
+import net.sf.jasperreports.engine.JRException;
 import utils.Banxico;
+import utils.ReportUtil;
 
 /**
  *
@@ -30,6 +31,9 @@ public class Desktop extends javax.swing.JFrame {
     ProductoManager manager;
     ClienteManager clienteM;
     List<ProductoCotizacion> productos;
+     double total = 0;
+        double subtotal = 0;
+        double impuesto = 0;
 
     /**
      * Creates new form Desktop
@@ -462,8 +466,12 @@ public class Desktop extends javax.swing.JFrame {
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fc.showOpenDialog(this);
-        File fichero = fc.getSelectedFile();
-        String rutaFichero = fichero.getAbsolutePath();
+        File directorio = fc.getSelectedFile();
+        String rutaDirectorio = directorio.getAbsolutePath();
+        
+        //Es la ruta donde mandaras tu reporte
+        if(rutaDirectorio!=null && !rutaDirectorio.trim().equals("")){
+            rutaDirectorio+=File.separator;
         Cotizacion cotizar = new Cotizacion();
         if (this.jcbCliente.getSelectedItem() instanceof Cliente) {
             Cliente c = (Cliente) this.jcbCliente.getSelectedItem();
@@ -472,7 +480,22 @@ public class Desktop extends javax.swing.JFrame {
         cotizar.setFecha(LocalDateTime.now());
         if (this.productos != null) {
             this.productos.forEach(lamda -> cotizar.getItems().add(lamda));
+            }
+        
+        cotizar.setSubTotal(subtotal);
+        cotizar.setTotal(total);
+        cotizar.setImpuestos(impuesto);
+        
+            try {
+                ReportUtil.generaReporte(rutaDirectorio, cotizar);
+            } catch (JRException ex) {
+                Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
+      
 
     }//GEN-LAST:event_btnGenerarCotizacionActionPerformed
 
@@ -484,9 +507,9 @@ public class Desktop extends javax.swing.JFrame {
     private void actualizaTabla() {
 
         ProductoCotizacionTableModel model = new ProductoCotizacionTableModel();
-        double total = 0;
-        double subtotal = 0;
-        double impuesto = 0;
+         total = 0;
+         subtotal = 0;
+         impuesto = 0;
         for (ProductoCotizacion pc : this.productos) {
             total += pc.getImporte();
             subtotal += pc.getSubtotal();

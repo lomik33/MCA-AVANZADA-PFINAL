@@ -1,6 +1,7 @@
 
 import entidades.Curso;
 import entidades.Producto;
+import interfaz.Desktop;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,8 +43,14 @@ public class Main {
 
     public static void main(String args[]) throws JRException, FileNotFoundException {
 
-        Main m = new Main();
-        m.generaReporte();
+        //Main m = new Main();
+        //m.generaReporte();
+         /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Desktop().setVisible(true);
+            }
+        });
 
         //Producto producto= new Producto();
 ////       Curso producto= new Curso();        
