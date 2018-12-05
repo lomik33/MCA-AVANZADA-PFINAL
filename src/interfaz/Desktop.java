@@ -367,6 +367,13 @@ public class Desktop extends javax.swing.JFrame {
         File fichero = fc.getSelectedFile();
         if (fichero != null) {
             txtCargarServicios.setText(fichero.getAbsolutePath());
+            try {
+                int totalImportados = ProductoManager.importarCsv(fichero);
+                JOptionPane.showMessageDialog(this, "Se importaron/actualizaron: " + totalImportados + " productos correctamente.");
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+                Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnServiciosActionPerformed
 
@@ -412,10 +419,10 @@ public class Desktop extends javax.swing.JFrame {
         if (fichero != null) {
             txtCargarClientes.setText(fichero.getAbsolutePath());
             try {
-                int totalImportados=ClienteManager.importarCsv(fichero);
-                JOptionPane.showMessageDialog(this, "Se importaron/actualizaron: "+totalImportados+" clientes correctamente.");
+                int totalImportados = ClienteManager.importarCsv(fichero);
+                JOptionPane.showMessageDialog(this, "Se importaron/actualizaron: " + totalImportados + " clientes correctamente.");
             } catch (IOException ex) {
-                 JOptionPane.showMessageDialog(this, ex.getMessage());
+                JOptionPane.showMessageDialog(this, ex.getMessage());
                 Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -439,9 +446,9 @@ public class Desktop extends javax.swing.JFrame {
                 Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (productoSeleccionado.isAplicaUsd()) {
-                productoCotizacion.setPrecioUnitario(productoCotizacion.getPrecioUnitarioUsd()*productoCotizacion.getTipoCambio());
+                productoCotizacion.setPrecioUnitario(productoCotizacion.getPrecioUnitarioUsd() * productoCotizacion.getTipoCambio());
             }
-            productoCotizacion.setImpuesto((productoCotizacion.getCantidad() * productoCotizacion.getPrecioUnitario())*productoSeleccionado.getTasaIva());
+            productoCotizacion.setImpuesto((productoCotizacion.getCantidad() * productoCotizacion.getPrecioUnitario()) * productoSeleccionado.getTasaIva());
             productoCotizacion.setSubtotal(productoCotizacion.getCantidad() * productoCotizacion.getPrecioUnitario());
             productoCotizacion.setImporte(productoCotizacion.getImpuesto() + productoCotizacion.getSubtotal());
             this.productos.add(productoCotizacion);
@@ -470,16 +477,16 @@ public class Desktop extends javax.swing.JFrame {
     private void actualizaTabla() {
 
         ProductoCotizacionTableModel model = new ProductoCotizacionTableModel();
-        double total=0;
-        double subtotal=0;
-        double impuesto=0;
-        for(ProductoCotizacion pc:this.productos){
-            total+=pc.getImporte();
-            subtotal+=pc.getSubtotal();
-            impuesto+=pc.getImpuesto();
-            
+        double total = 0;
+        double subtotal = 0;
+        double impuesto = 0;
+        for (ProductoCotizacion pc : this.productos) {
+            total += pc.getImporte();
+            subtotal += pc.getSubtotal();
+            impuesto += pc.getImpuesto();
+
         }
-        
+
         model.actualiza(productos);
         this.jtbServiciosAgregados.setModel(model);
         this.jTextField1.setText(Double.toString(impuesto));
