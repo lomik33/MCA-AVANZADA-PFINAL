@@ -122,6 +122,12 @@ public class Desktop extends javax.swing.JFrame {
 
         jpnMenu.setBackground(new java.awt.Color(102, 102, 255));
         jpnMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jpnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jpnMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jpnMenuMousePressed(evt);
+            }
+        });
         jpnMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnCotizar.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
@@ -475,6 +481,10 @@ public class Desktop extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnGenerarCotizacionActionPerformed
+
+    private void jpnMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnMenuMousePressed
+        
+    }//GEN-LAST:event_jpnMenuMousePressed
 
     private void actualizaCatalogos() {
         manager.toSelect().forEach(l -> this.jcbCurso.addItem(l));
