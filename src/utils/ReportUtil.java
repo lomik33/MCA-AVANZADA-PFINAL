@@ -126,7 +126,7 @@ public class ReportUtil {
 
         // Export to PDF.
         JasperExportManager.exportReportToPdfFile(jasperPrint,
-                rutaReportes + "ejempls.pdf");
+                rutaReportes + "cotizacion.pdf");
 
        JRDocxExporter exporter = new JRDocxExporter();
     exporter.setExporterInput(new SimpleExporterInput(jasperPrint));      
